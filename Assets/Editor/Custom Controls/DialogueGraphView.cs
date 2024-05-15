@@ -38,6 +38,8 @@ public class DialogueGraphView : GraphView
         DeleteElements(graphElements);
         graphViewChanged += OnGraphViewChanged;
 
+        #region Revision
+        // TODO: Needs Revision as I am just putting to screen things that are only linked
         foreach (Dialogue startingTopic in currentDlgRoot.StartingTopics)
         {
             // If we can create a node from this topic
@@ -51,6 +53,7 @@ public class DialogueGraphView : GraphView
             }
 
         }
+        #endregion
         //currentDlgRoot.StartingTopics.ForEach(dlg => CreateNodeView(dlg));
 
 

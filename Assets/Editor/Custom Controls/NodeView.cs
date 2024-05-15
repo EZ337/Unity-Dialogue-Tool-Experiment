@@ -10,5 +10,15 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         this.dlg = dlg;
         this.title = dlg.name;
+        
+        style.left = dlg.EditorPosition.x;
+        style.top = dlg.EditorPosition.y;
+    }
+
+    public override void SetPosition(Rect newPos)
+    {
+        base.SetPosition(newPos);
+        dlg.EditorPosition.x = newPos.xMin;
+        dlg.EditorPosition.y = newPos.yMin;  
     }
 }

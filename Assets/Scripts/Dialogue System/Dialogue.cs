@@ -9,6 +9,7 @@ public class Dialogue : ScriptableObject
     private bool isStartingTopic = false;
 
     public string guid;
+    public Vector2 EditorPosition;
 
     [SerializeField, Tooltip("The text the player will say")]
     private string playerPrompt;
