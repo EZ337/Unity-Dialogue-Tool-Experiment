@@ -6,10 +6,11 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName ="New Dialogue", menuName ="Dialogue System/Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    private bool isStartingTopic = false;
+    [HideInInspector] public string guid;
+    [HideInInspector] public Vector2 EditorPosition;
 
-    public string guid;
-    public Vector2 EditorPosition;
+
+    private bool isStartingTopic = false;
 
     [SerializeField, Tooltip("The text the player will say")]
     private string playerPrompt;

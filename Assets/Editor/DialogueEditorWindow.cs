@@ -29,6 +29,8 @@ public class DialogueEditorWindow : EditorWindow
         // Get references to the views in the window
         dlgGraphView = root.Q<DialogueGraphView>();
         dlgInspectorView = root.Q<InspectorView>();
+
+        OnSelectionChange();
     }
 
     #region Needs Revision to be when we select a dlg Root
@@ -37,6 +39,9 @@ public class DialogueEditorWindow : EditorWindow
         DialogueRoot dlgRoot = Selection.activeObject as DialogueRoot;
         if (dlgRoot != null)
         {
+            Label title = dlgGraphView.Q<Label>("root-owner");
+            title.text = dlgRoot.name + " > " + dlgRoot.TopicName;
+
             dlgGraphView.PopulateView(dlgRoot);
         }
     }

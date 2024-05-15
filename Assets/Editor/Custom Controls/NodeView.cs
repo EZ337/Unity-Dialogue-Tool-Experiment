@@ -10,7 +10,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         this.dlg = dlg;
         this.title = dlg.name;
-        
+        this.viewDataKey = dlg.guid;
         style.left = dlg.EditorPosition.x;
         style.top = dlg.EditorPosition.y;
     }
