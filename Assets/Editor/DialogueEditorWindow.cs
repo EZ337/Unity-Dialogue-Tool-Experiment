@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 
 public class DialogueEditorWindow : EditorWindow
 {
+    DialogueGraphView dlgGraphView;
+    InspectorView dlgInspectorView;
+
     [SerializeField]
     private VisualTreeAsset m_VisualTreeAsset = default;
 
@@ -23,5 +26,19 @@ public class DialogueEditorWindow : EditorWindow
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/DialogueEditorWindow.uxml");
         visualTree.CloneTree(root);
 
+        // Get references to the views in the window
+        dlgGraphView = root.Q<DialogueGraphView>();
+        dlgInspectorView = root.Q<InspectorView>();
     }
+
+    #region Needs Revision to be when we select a dlg Root
+    private void OnSelectionChange()
+    {
+        DialogueRoot dlgRoot = Selection.activeObject as DialogueRoot;
+        if (dlgRoot != null)
+        {
+            dlgGraphView.PopulateView(dlgRoot);
+        }
+    }
+    #endregion
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
 public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
@@ -10,7 +11,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     private string topicName;
 
     [SerializeField, Tooltip("The first dialogue option that constitutes this dialogue tree")]
-    private Dialogue[] startingTopics;
+    private List<Dialogue >startingTopics;
 
     [SerializeField, Tooltip("The type of dialogue we are leading to")]
     private DialogueType dlgType;
@@ -21,7 +22,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     /// <summary>
     /// The starting topic for this main branch
     /// </summary>
-    public Dialogue[] StartingTopics { get => startingTopics; set => startingTopics = value; }
+    public List<Dialogue> StartingTopics { get => startingTopics; set => startingTopics = value; }
 
     /// <summary>
     /// The type of dialogue. Preempt will block all other dialogues until its condition is false.
@@ -37,6 +38,43 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     /// The "id" of this 
     /// </summary>
     public string TopicName { get => topicName; set => topicName = value; }
+
+
+    #region GraphView Stuff
+
+    public Dialogue CreateTopic(bool isStartingTopic = false)
+    {
+        Dialogue dlg = ScriptableObject.CreateInstance<Dialogue>();
+        dlg.name = "New Dialogue Entry";
+        dlg.guid = GUID.Generate().ToString();
+
+        if (isStartingTopic )
+        {
+            startingTopics.Add(dlg);
+        }
+
+        AssetDatabase.AddObjectToAsset(dlg, this);
+        AssetDatabase.SaveAssets();
+        return dlg;
+    }
+
+    public void DeleteTopic(Dialogue dlg, bool isStartingTopic = false)
+    {
+        // Delete from starting topic list if it's a starting topic
+        if (isStartingTopic)
+        {
+            if (!StartingTopics.Remove(dlg))
+            {
+                Debug.LogWarning($"Failed to remove Dialogue: {dlg.name} from starting topics");
+            }
+        }
+
+        AssetDatabase.RemoveObjectFromAsset(dlg);
+        AssetDatabase.SaveAssets();
+    }
+
+    #endregion
+
 
 
     /// <summary>

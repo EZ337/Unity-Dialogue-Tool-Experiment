@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName ="New Dialogue", menuName ="Dialogue System/Dialogue")]
 public class Dialogue : ScriptableObject
 {
+    public string guid;
+
     [SerializeField, Tooltip("The text the player will say")]
     private string playerPrompt;
 
