@@ -11,7 +11,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     private string topicName;
 
     [SerializeField, Tooltip("The first dialogue option that constitutes this dialogue tree")]
-    private List<Dialogue >startingTopics;
+    private List<Dialogue >startingTopics = new();
 
     [SerializeField, Tooltip("The type of dialogue we are leading to")]
     private DialogueType dlgType;
@@ -51,6 +51,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
         if (isStartingTopic )
         {
             startingTopics.Add(dlg);
+            dlg.IsStartingTopic = true;
         }
 
         AssetDatabase.AddObjectToAsset(dlg, this);
@@ -58,10 +59,10 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
         return dlg;
     }
 
-    public void DeleteTopic(Dialogue dlg, bool isStartingTopic = false)
+    public void DeleteTopic(Dialogue dlg)
     {
         // Delete from starting topic list if it's a starting topic
-        if (isStartingTopic)
+        if (dlg.IsStartingTopic)
         {
             if (!StartingTopics.Remove(dlg))
             {

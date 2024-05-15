@@ -34,25 +34,63 @@ public class DialogueGraphView : GraphView
     {
         currentDlgRoot = dlgRoot;
 
+        graphViewChanged -= OnGraphViewChanged;
         DeleteElements(graphElements);
+        graphViewChanged += OnGraphViewChanged;
 
-        foreach (var startingTopic in currentDlgRoot.StartingTopics)
+        foreach (Dialogue startingTopic in currentDlgRoot.StartingTopics)
         {
-            CreateNodeView(startingTopic);
-            foreach( var dlg in startingTopic.NextDialogueOptions)
+            // If we can create a node from this topic
+            if (CreateNodeView(startingTopic))
             {
-                CreateNodeView(dlg); // Needs revision later
+                // Display that topic's options as well
+                foreach (var dlg in startingTopic.NextDialogueOptions)
+                {
+                    CreateNodeView(dlg); // Needs revision later
+                }
             }
+
         }
         //currentDlgRoot.StartingTopics.ForEach(dlg => CreateNodeView(dlg));
 
 
     }
 
-    private void CreateNodeView(Dialogue dlg)
+    /// <summary>
+    /// Event received when the graph view is interacted with
+    /// </summary>
+    /// <param name="graphViewChange"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
-        NodeView nodeView = new NodeView(dlg);
-        AddElement(nodeView);
+        graphViewChange.elementsToRemove?.ForEach(elem =>
+            {
+                NodeView nodeview = elem as NodeView;
+                if (nodeview != null)
+                {
+                    currentDlgRoot.DeleteTopic(nodeview.dlg);
+                }
+            });
+
+        return graphViewChange;
+    }
+
+    /// <summary>
+    /// Creates a node. Returns true if success. False otherwise
+    /// </summary>
+    /// <param name="dlg">Dialogue that the nodeView will hold</param>
+    /// <returns>True if succesful</returns>
+    private bool CreateNodeView(Dialogue dlg)
+    {
+        if (dlg != null)
+        {
+            NodeView nodeView = new NodeView(dlg);
+            AddElement(nodeView);
+            return true;
+        }
+        return false;
+
     }
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName ="New Dialogue", menuName ="Dialogue System/Dialogue")]
 public class Dialogue : ScriptableObject
 {
+    private bool isStartingTopic = false;
+
     public string guid;
 
     [SerializeField, Tooltip("The text the player will say")]
@@ -40,4 +42,5 @@ public class Dialogue : ScriptableObject
     /// The next dialogue options the player will have to select from
     /// </summary>
     public Dialogue[] NextDialogueOptions { get => nextDialogueOptions; set => nextDialogueOptions = value; }
+    public bool IsStartingTopic { get => isStartingTopic; set => isStartingTopic = value; }
 }
