@@ -10,7 +10,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     private string topicName;
 
     [SerializeField, Tooltip("The first dialogue option that constitutes this dialogue tree")]
-    private Dialogue startingTopic;
+    private Dialogue[] startingTopics;
 
     [SerializeField, Tooltip("The type of dialogue we are leading to")]
     private DialogueType dlgType;
@@ -21,7 +21,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     /// <summary>
     /// The starting topic for this main branch
     /// </summary>
-    public Dialogue StartingTopic { get => startingTopic; set => startingTopic = value; }
+    public Dialogue[] StartingTopics { get => startingTopics; set => startingTopics = value; }
 
     /// <summary>
     /// The type of dialogue. Preempt will block all other dialogues until its condition is false.

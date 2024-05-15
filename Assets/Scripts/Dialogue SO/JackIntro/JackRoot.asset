@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: JackRoot
   m_EditorClassIdentifier: 
   topicName: SampleScene
-  startingTopic: {fileID: 0}
+  startingTopics:
+  - {fileID: 11400000, guid: 46902329e0ca0ee488dfb2e94904aafe, type: 2}
+  - {fileID: 11400000, guid: a2ad7c362e40c3244a8a5b755563dfac, type: 2}
   dlgType: 0
   priority: 0
