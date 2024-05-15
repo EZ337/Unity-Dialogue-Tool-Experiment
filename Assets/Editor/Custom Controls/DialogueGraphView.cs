@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
 using System;
+using System.Linq;
 
 public class DialogueGraphView : GraphView
 {
@@ -38,20 +39,15 @@ public class DialogueGraphView : GraphView
         DeleteElements(graphElements);
         graphViewChanged += OnGraphViewChanged;
 
+        // Get all the Dialgues under our root scriptableobject
+        var dlgs = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(currentDlgRoot))
+            .Where(asset => asset.GetType() == typeof(Dialogue));
+
         #region Revision
         // TODO: Needs Revision as I am just putting to screen things that are only linked
-        foreach (Dialogue startingTopic in currentDlgRoot.StartingTopics)
+        foreach (Dialogue topic in dlgs)
         {
-            // If we can create a node from this topic
-            if (CreateNodeView(startingTopic))
-            {
-                // Display that topic's options as well
-                foreach (var dlg in startingTopic.NextDialogueOptions)
-                {
-                    CreateNodeView(dlg); // Needs revision later
-                }
-            }
-
+            CreateNodeView(topic);
         }
         #endregion
         //currentDlgRoot.StartingTopics.ForEach(dlg => CreateNodeView(dlg));
