@@ -640,11 +640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d5ab37cb7342a4098fb265132dd36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root:
-  - topicName: NPC Main Dialogue
-    startingTopic: {fileID: 11400000, guid: f64bf66ffb80ea6498acb698b2bef8d9, type: 2}
-    dlgType: 0
-    priority: 0
+  DialogueTopics:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: a6883e21a52ce7b41b9822c77c777000, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

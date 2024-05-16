@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Foldout text="Create New Dialogue Root" name="Foldout" value="true">
+            <ui:TextField picking-mode="Ignore" label="Topic Name" value="New Topic" name="topic-name" binding-path="topicName" />
+            <ui:EnumField label="Dialogue Type" type="DialogueType, Assembly-CSharp" name="dlg-type-enum" />
+            <ui:IntegerField label="Priority" value="0" name="dlg-priority" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: center; align-self: auto;">
+                <ui:Button text="Create New Dialogue Root" parse-escape-sequences="true" display-tooltip-when-elided="true" view-data-key="create-btn" name="create-dlg-btn" />
+                <ui:Button text="Open Dialogue Editor" parse-escape-sequences="true" display-tooltip-when-elided="true" name="open-dlg-btn" />
+            </ui:VisualElement>
+        </ui:Foldout>
+    </ui:VisualElement>
+    <ui:ListView binding-path="DialogueTopics" show-bound-collection-size="true" header-title="Dialogue Roots" show-foldout-header="true" name="dlg-roots" />
+</ui:UXML>

@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.Callbacks;
 
 public class DialogueEditorWindow : EditorWindow
 {
@@ -32,6 +33,18 @@ public class DialogueEditorWindow : EditorWindow
 
         OnSelectionChange();
     }
+
+    //[OnOpenAsset]
+    //public static bool OnOpenAsset(int instannceId, int line)
+    //{
+    //    if ()
+    //    {
+    //        ShowWindow();
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 
     #region Needs Revision to be when we select a dlg Root
     private void OnSelectionChange()

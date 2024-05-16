@@ -43,4 +43,9 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         dlg.EditorPosition.x = newPos.xMin;
         dlg.EditorPosition.y = newPos.yMin;  
     }
+
+    public override void OnSelected()
+    {
+        base.OnSelected();
+    }
 }

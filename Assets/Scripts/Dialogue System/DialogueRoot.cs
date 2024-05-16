@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
+//[CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
 public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 {
+    private CharacterDialogue owner;
+
     [SerializeField, Tooltip("The name of this dialogue tree")]
     private string topicName;
 
@@ -18,6 +20,9 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
     [SerializeField, Tooltip("Sorting order for the dialogues")]
     private int priority;
+
+
+    #region Properties
 
     /// <summary>
     /// The starting topic for this main branch
@@ -39,13 +44,23 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     /// </summary>
     public string TopicName { get => topicName; set => topicName = value; }
 
+    #endregion
+
+    public void Iniitialise(CharacterDialogue owner, string  topicName, DialogueType dlgType, int priority)
+    {
+        this.owner = owner;
+        this.topicName = topicName;
+        this.dlgType = dlgType;
+        this.priority = priority;
+    }
 
     #region GraphView Stuff
     int index = 0;
-    public Dialogue CreateTopic(bool isStartingTopic = false)
+    public Dialogue CreateTopic(DialogueRoot root, bool isStartingTopic = false)
     {
         Dialogue dlg = ScriptableObject.CreateInstance<Dialogue>();
         dlg.name = $"New Dialogue Entry {index++}";
+        dlg.Root = root ;
         dlg.guid = GUID.Generate().ToString();
 
         if (isStartingTopic )

@@ -7,7 +7,7 @@ public class Dialogue : ScriptableObject
 {
     [HideInInspector] public string guid;
     [HideInInspector] public Vector2 EditorPosition;
-
+    private DialogueRoot root;
 
     private bool isStartingTopic = false;
 
@@ -44,4 +44,5 @@ public class Dialogue : ScriptableObject
     /// </summary>
     public List<Dialogue> NextDialogueOptions { get => nextDialogueOptions; set => nextDialogueOptions = value; }
     public bool IsStartingTopic { get => isStartingTopic; set => isStartingTopic = value; }
+    public DialogueRoot Root { get => root; set => root = value; }
 }

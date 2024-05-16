@@ -134,9 +134,9 @@ public class DialogueGraphView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
-        //base.BuildContextualMenu(evt);
-        evt.menu.AppendAction("Create New Starting Dialogue", _ => CreateNewDialogue(true)); // Create new Starting dialogue
-        evt.menu.AppendAction("Create New Dialogue", _ => CreateNewDialogue(false)); // Create regular dialogue
+
+        evt.menu.AppendAction("Create New Starting Dialogue", (evt) => CreateNewDialogue(true)); // Create new Starting dialogue
+        evt.menu.AppendAction("Create New Dialogue", (evt) => CreateNewDialogue(false)); // Create regular dialogue
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -149,7 +149,9 @@ public class DialogueGraphView : GraphView
     private void CreateNewDialogue(bool isStartingTopic)
     {
         //Debug.Log("Pressed Create New starting topic");
-        Dialogue dlg = currentDlgRoot.CreateTopic(isStartingTopic);
+        Dialogue dlg = currentDlgRoot.CreateTopic(currentDlgRoot, isStartingTopic);
         CreateNodeView(dlg);
     }
+
+    
 }
