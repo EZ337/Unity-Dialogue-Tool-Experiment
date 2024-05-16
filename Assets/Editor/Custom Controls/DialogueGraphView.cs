@@ -35,9 +35,7 @@ public class DialogueGraphView : GraphView
     {
         currentDlgRoot = dlgRoot;
 
-        graphViewChanged -= OnGraphViewChanged;
-        DeleteElements(graphElements);
-        graphViewChanged += OnGraphViewChanged;
+        ClearView();
 
         // Get all the Dialgues under our root scriptableobject
         var dlgs = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(currentDlgRoot))
@@ -113,6 +111,16 @@ public class DialogueGraphView : GraphView
         }
 
         return graphViewChange;
+    }
+
+    /// <summary>
+    /// Subtly clears the view. Does not remove/destroy anything
+    /// </summary>
+    public void ClearView()
+    {
+        graphViewChanged -= OnGraphViewChanged;
+        DeleteElements(graphElements);
+        graphViewChanged += OnGraphViewChanged;
     }
 
     /// <summary>

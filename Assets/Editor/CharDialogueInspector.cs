@@ -61,8 +61,14 @@ public class CharDialogueInspector : Editor
             AssetDatabase.CreateFolder("Assets/Dialogues", this.target.name);
         }
 
+        if (AssetDatabase.LoadAssetAtPath<DialogueRoot>($"{targetPath}{dlgRootName.value}.asset") != null)
+        {
+            Debug.LogWarning($"There's already a DialogueRoot named \"{dlgRootName.value}\" in {targetPath}");
+            return;
+        }
+
         DialogueRoot dialogueRoot = ScriptableObject.CreateInstance<DialogueRoot>();
-        dialogueRoot.Iniitialise(owningCharacter, dlgRootName.value, (DialogueType)dlgType.value, priority.value);
+        dialogueRoot.Iniitialise(dlgRootName.value, (DialogueType)dlgType.value, priority.value);
 
         AssetDatabase.CreateAsset(dialogueRoot, $"Assets/Dialogues/{this.target.name}/{dialogueRoot.TopicName}.asset");
         AssetDatabase.SaveAssets();

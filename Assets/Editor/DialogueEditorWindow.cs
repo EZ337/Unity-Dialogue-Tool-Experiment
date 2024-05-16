@@ -2,14 +2,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
+using System.Collections.Generic;
 
 public class DialogueEditorWindow : EditorWindow
 {
     DialogueGraphView dlgGraphView;
     InspectorView dlgInspectorView;
+    Label dlgRootLabel;
 
     [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
+    private VisualTreeAsset visualTree;
 
     [MenuItem("Window/Dialogue Editor")]
     public static void ShowWindow()
@@ -24,12 +26,16 @@ public class DialogueEditorWindow : EditorWindow
         VisualElement root = rootVisualElement;
 
         // Import UXML
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/DialogueEditorWindow.uxml");
+        if (visualTree == null)
+        {
+            visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/DialogueEditorWindow.uxml");
+        }
         visualTree.CloneTree(root);
 
         // Get references to the views in the window
         dlgGraphView = root.Q<DialogueGraphView>();
         dlgInspectorView = root.Q<InspectorView>();
+        dlgRootLabel = root.Q<Label>("root-owner");
 
         OnSelectionChange();
     }
@@ -52,14 +58,63 @@ public class DialogueEditorWindow : EditorWindow
         DialogueRoot dlgRoot = Selection.activeObject as DialogueRoot;
         if (dlgRoot != null)
         {
-            Label title = dlgGraphView.Q<Label>("root-owner");
-            title.text = dlgRoot.name + " > " + dlgRoot.TopicName;
+            dlgRootLabel.text = dlgRoot.name + " > " + dlgRoot.TopicName;
 
             dlgGraphView.SetEnabled(true);
             dlgGraphView.PopulateView(dlgRoot);
+            return;
         }
-        //else
-        //    dlgGraphView.SetEnabled(false);
+        Dialogue dlg = Selection.activeObject as Dialogue;
+        if (dlg != null && dlg.Root != null) 
+        {
+            dlgRootLabel.text = dlg.Root.name + " > " + dlg.Root.TopicName;
+            dlgGraphView.SetEnabled(true);
+            dlgGraphView.PopulateView(dlg.Root);
+            return;
+        }
+        if (Selection.activeGameObject != null && Selection.activeGameObject.TryGetComponent<CharacterDialogue>(out CharacterDialogue charDlg))
+        {
+            // Populate Inspector
+
+            #region Revision. Modify the AssetDestroy so that it automatically handles this
+            // Select the first DlgRoot from List
+            if (charDlg.DialogueTopics.Count > 0)
+            {
+
+                // Make sure DialogueRoots are always valid in case someone deleted from the wrong place.
+                if (charDlg.DialogueTopics[0] == null)
+                {
+                    Debug.LogWarning("For some reason, DlgRoot[0] is null");
+
+                    List<DialogueRoot> newRoots = new List<DialogueRoot>();
+                    charDlg.DialogueTopics.ForEach((dlg) =>
+                    {
+                        if (dlg != null)
+                        {
+                            newRoots.Add(dlg);
+                        }
+                    });
+
+                    charDlg.DialogueTopics = newRoots;
+                }
+
+                // Now display the new 0th root if available
+                if (charDlg.DialogueTopics.Count > 0)
+                {
+                    dlgRoot = charDlg.DialogueTopics[0];
+
+                    dlgRootLabel.text = dlgRoot.name + " > " + dlgRoot.TopicName;
+                    dlgGraphView.SetEnabled(true);
+                    dlgGraphView.PopulateView(dlgRoot);
+                    return;
+                }
+
+            }
+            #endregion
+        }
+
+        dlgGraphView.ClearView();
+        dlgGraphView.SetEnabled(false);
     }
     #endregion
 }

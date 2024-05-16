@@ -7,8 +7,6 @@ using UnityEditor;
 //[CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
 public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 {
-    private CharacterDialogue owner;
-
     [SerializeField, Tooltip("The name of this dialogue tree")]
     private string topicName;
 
@@ -46,9 +44,8 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
     #endregion
 
-    public void Iniitialise(CharacterDialogue owner, string  topicName, DialogueType dlgType, int priority)
+    public void Iniitialise(string  topicName, DialogueType dlgType, int priority)
     {
-        this.owner = owner;
         this.topicName = topicName;
         this.dlgType = dlgType;
         this.priority = priority;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7375234388082470486
+--- !u!114 &-7705695642741101618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 8
+  m_Name: New Dialogue Entry 2
   m_EditorClassIdentifier: 
-  guid: 428c98fc0300544418bb952668c4cef3
+  guid: 6ad3f377e97c54745a67684eacec6af9
   EditorPosition: {x: 0, y: 0}
   playerPrompt: 
   responses: []
@@ -23,7 +23,7 @@ MonoBehaviour:
   dialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-4406946239338065321
+--- !u!114 &-6790207094980151945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33,34 +33,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 6
+  m_Name: New Dialogue Entry 1
   m_EditorClassIdentifier: 
-  guid: fd533ed33a333894b91149ecc9de914e
-  EditorPosition: {x: 306.659, y: -53.96265}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions:
-  - {fileID: -114120653605199285}
-  dialogueBeginEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  dialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &-114120653605199285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 7
-  m_EditorClassIdentifier: 
-  guid: 7dd2f280ab9f6794397346934cbaa2c7
-  EditorPosition: {x: 621.28015, y: 11.660039}
+  guid: ec98f05a8a58e474c83a16d4e23272d4
+  EditorPosition: {x: 0, y: 0}
   playerPrompt: 
   responses: []
   nextDialogueOptions: []
@@ -80,14 +56,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
-  m_Name: New Topic
+  m_Name: Topic2
   m_EditorClassIdentifier: 
-  topicName: New Topic
+  topicName: Topic2
   startingTopics:
-  - {fileID: 5772957346007580799}
+  - {fileID: 2397038241709978599}
   dlgType: 0
   priority: 0
---- !u!114 &4215443937165137361
+--- !u!114 &2397038241709978599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,38 +73,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 5
+  m_Name: New Dialogue Entry 0
   m_EditorClassIdentifier: 
-  guid: 45bf6398265399a44b827ba734e2edda
-  EditorPosition: {x: 357.9632, y: 151.58055}
+  guid: 51d17587278dae84d9ba9c2cdd0b158e
+  EditorPosition: {x: 0, y: 0}
   playerPrompt: 
   responses: []
   nextDialogueOptions: []
-  dialogueBeginEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  dialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &5772957346007580799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 4
-  m_EditorClassIdentifier: 
-  guid: e83ee734d2f905e4096f8ea57ea1a758
-  EditorPosition: {x: -30.595997, y: 15.158069}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions:
-  - {fileID: -4406946239338065321}
-  - {fileID: 4215443937165137361}
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []

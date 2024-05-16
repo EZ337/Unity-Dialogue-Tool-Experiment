@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueTopics:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 92b3fccbef192fd4b99eda1ebf7a6745, type: 2}
   - {fileID: 11400000, guid: a6883e21a52ce7b41b9822c77c777000, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
