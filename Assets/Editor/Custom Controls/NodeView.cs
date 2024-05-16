@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
     public Dialogue dlg;
+    public Port iPort;
+    public Port oPort;
 
     public NodeView(Dialogue dlg)
     {
@@ -13,6 +17,24 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         this.viewDataKey = dlg.guid;
         style.left = dlg.EditorPosition.x;
         style.top = dlg.EditorPosition.y;
+
+        CreateInputPort();
+        CreateOutputPort();
+    }
+
+
+    private void CreateInputPort()
+    {
+        if (dlg.IsStartingTopic)
+            return;
+
+        iPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(Dialogue));
+        inputContainer.Add(iPort);
+    }
+    private void CreateOutputPort()
+    {
+        oPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(Dialogue));
+        outputContainer.Add(oPort);
     }
 
     public override void SetPosition(Rect newPos)

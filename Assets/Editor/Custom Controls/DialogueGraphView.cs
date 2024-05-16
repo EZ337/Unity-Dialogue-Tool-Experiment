@@ -64,13 +64,34 @@ public class DialogueGraphView : GraphView
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
         graphViewChange.elementsToRemove?.ForEach(elem =>
+        {
+            NodeView nodeview = elem as NodeView;
+            if (nodeview != null)
             {
-                NodeView nodeview = elem as NodeView;
-                if (nodeview != null)
-                {
-                    currentDlgRoot.DeleteTopic(nodeview.dlg);
-                }
+                // Delete a topic
+                currentDlgRoot.DeleteTopic(nodeview.dlg);
+            }
+
+            Edge edge = elem as Edge;
+            if (edge != null)
+            {
+                NodeView start = edge.output.node as NodeView;
+                NodeView end = edge.input.node as NodeView;
+
+                currentDlgRoot.RemoveConnection(start.dlg, end.dlg);
+            }
+        });
+
+        if (graphViewChange.edgesToCreate != null)
+        {
+            graphViewChange.edgesToCreate.ForEach(edge =>
+            {
+                NodeView iNode = edge.input.node as NodeView;
+                NodeView oNode = edge.output.node as NodeView;
+
+                currentDlgRoot.ConnectDialogue(((NodeView)edge.output.node).dlg, ((NodeView)edge.input.node).dlg);
             });
+        }
 
         return graphViewChange;
     }
@@ -94,9 +115,16 @@ public class DialogueGraphView : GraphView
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
     {
-        base.BuildContextualMenu(evt);
+        //base.BuildContextualMenu(evt);
         evt.menu.AppendAction("Create New Starting Dialogue", _ => CreateNewDialogue(true)); // Create new Starting dialogue
         evt.menu.AppendAction("Create New Dialogue", _ => CreateNewDialogue(false)); // Create regular dialogue
+    }
+
+    public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+    {
+        return ports.ToList().Where(endPort => 
+            (endPort.direction != startPort.direction) && (endPort.node != startPort.node)
+        ).ToList();
     }
 
     private void CreateNewDialogue(bool isStartingTopic)

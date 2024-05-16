@@ -42,8 +42,11 @@ public class DialogueEditorWindow : EditorWindow
             Label title = dlgGraphView.Q<Label>("root-owner");
             title.text = dlgRoot.name + " > " + dlgRoot.TopicName;
 
+            dlgGraphView.SetEnabled(true);
             dlgGraphView.PopulateView(dlgRoot);
         }
+        //else
+        //    dlgGraphView.SetEnabled(false);
     }
     #endregion
 }

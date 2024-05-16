@@ -41,11 +41,11 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
 
     #region GraphView Stuff
-
+    int index = 0;
     public Dialogue CreateTopic(bool isStartingTopic = false)
     {
         Dialogue dlg = ScriptableObject.CreateInstance<Dialogue>();
-        dlg.name = "New Dialogue Entry";
+        dlg.name = $"New Dialogue Entry {index++}";
         dlg.guid = GUID.Generate().ToString();
 
         if (isStartingTopic )
@@ -72,6 +72,19 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
         AssetDatabase.RemoveObjectFromAsset(dlg);
         AssetDatabase.SaveAssets();
+    }
+
+    public void ConnectDialogue(Dialogue parent, Dialogue next)
+    {
+        parent.NextDialogueOptions.Add(next);
+    }
+
+    public void RemoveConnection(Dialogue parent, Dialogue next)
+    {
+        if (!parent.NextDialogueOptions.Remove(next))
+        {
+            Debug.LogWarning("Failed to remove NextDialogueConnection");
+        }
     }
 
     #endregion

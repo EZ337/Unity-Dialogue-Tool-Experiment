@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName ="New Dialogue", menuName ="Dialogue System/Dialogue")]
 public class Dialogue : ScriptableObject
 {
     [HideInInspector] public string guid;
@@ -21,7 +20,7 @@ public class Dialogue : ScriptableObject
     // Flags
 
     [SerializeField, Tooltip("The next dialogue options the player will have to select from")]
-    private Dialogue[] nextDialogueOptions;
+    private List<Dialogue> nextDialogueOptions = new List<Dialogue>();
 
     // Conditions
 
@@ -43,6 +42,6 @@ public class Dialogue : ScriptableObject
     /// <summary>
     /// The next dialogue options the player will have to select from
     /// </summary>
-    public Dialogue[] NextDialogueOptions { get => nextDialogueOptions; set => nextDialogueOptions = value; }
+    public List<Dialogue> NextDialogueOptions { get => nextDialogueOptions; set => nextDialogueOptions = value; }
     public bool IsStartingTopic { get => isStartingTopic; set => isStartingTopic = value; }
 }
