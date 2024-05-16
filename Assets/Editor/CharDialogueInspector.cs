@@ -68,7 +68,7 @@ public class CharDialogueInspector : Editor
         }
 
         DialogueRoot dialogueRoot = ScriptableObject.CreateInstance<DialogueRoot>();
-        dialogueRoot.Iniitialise(dlgRootName.value, (DialogueType)dlgType.value, priority.value);
+        dialogueRoot.Initialise(dlgRootName.value, (DialogueType)dlgType.value, priority.value);
 
         AssetDatabase.CreateAsset(dialogueRoot, $"Assets/Dialogues/{this.target.name}/{dialogueRoot.TopicName}.asset");
         AssetDatabase.SaveAssets();

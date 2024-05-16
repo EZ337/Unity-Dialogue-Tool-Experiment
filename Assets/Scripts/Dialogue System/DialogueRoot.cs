@@ -44,7 +44,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
     #endregion
 
-    public void Iniitialise(string  topicName, DialogueType dlgType, int priority)
+    public void Initialise(string  topicName, DialogueType dlgType, int priority)
     {
         this.topicName = topicName;
         this.dlgType = dlgType;

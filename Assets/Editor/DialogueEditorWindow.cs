@@ -55,6 +55,7 @@ public class DialogueEditorWindow : EditorWindow
     #region Needs Revision to be when we select a dlg Root
     private void OnSelectionChange()
     {
+        // If we select a DialogueRoot Asset (In the project folder)
         DialogueRoot dlgRoot = Selection.activeObject as DialogueRoot;
         if (dlgRoot != null)
         {
@@ -64,6 +65,8 @@ public class DialogueEditorWindow : EditorWindow
             dlgGraphView.PopulateView(dlgRoot);
             return;
         }
+        
+        // If we Select A dialogue Asset (A child of a DialogueRoot In the project folder)
         Dialogue dlg = Selection.activeObject as Dialogue;
         if (dlg != null && dlg.Root != null) 
         {
@@ -72,7 +75,9 @@ public class DialogueEditorWindow : EditorWindow
             dlgGraphView.PopulateView(dlg.Root);
             return;
         }
-        if (Selection.activeGameObject != null && Selection.activeGameObject.TryGetComponent<CharacterDialogue>(out CharacterDialogue charDlg))
+        
+        // If we select a gameObject that has the CharacterDialogue component on it (The most ideal way)
+        if (Selection.activeGameObject != null && Selection.activeGameObject.TryGetComponent(out CharacterDialogue charDlg))
         {
             // Populate Inspector
 
@@ -106,6 +111,7 @@ public class DialogueEditorWindow : EditorWindow
                     dlgRootLabel.text = dlgRoot.name + " > " + dlgRoot.TopicName;
                     dlgGraphView.SetEnabled(true);
                     dlgGraphView.PopulateView(dlgRoot);
+                    dlgInspectorView.PopulateDialogueInspector(charDlg.DialogueTopics);
                     return;
                 }
 
