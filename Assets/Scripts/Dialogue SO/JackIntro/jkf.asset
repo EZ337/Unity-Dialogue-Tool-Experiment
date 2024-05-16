@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
+  m_Name: jkf
+  m_EditorClassIdentifier: 
+  topicName: 
+  startingTopics:
+  - {fileID: 3958603980092891446}
+  dlgType: 0
+  priority: 0
+--- !u!114 &3920455849948767930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: New Dialogue Entry 2
+  m_EditorClassIdentifier: 
+  guid: 1e7b4a9475e349743a9ebe01debf9244
+  EditorPosition: {x: 275.96167, y: -27.331663}
+  playerPrompt: 
+  responses: []
+  nextDialogueOptions: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3958603980092891446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: New Dialogue Entry 0
+  m_EditorClassIdentifier: 
+  guid: a8d86da00f081d1468dd4122736dc4da
+  EditorPosition: {x: -11.461706, y: 42.32001}
+  playerPrompt: 
+  responses: []
+  nextDialogueOptions:
+  - {fileID: 3920455849948767930}
+  - {fileID: 6896539959697172101}
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6896539959697172101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: New Dialogue Entry 1
+  m_EditorClassIdentifier: 
+  guid: ca98e677db05a2c449a52ea6d5df5b2b
+  EditorPosition: {x: 284.4316, y: 151.78831}
+  playerPrompt: 
+  responses: []
+  nextDialogueOptions: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []

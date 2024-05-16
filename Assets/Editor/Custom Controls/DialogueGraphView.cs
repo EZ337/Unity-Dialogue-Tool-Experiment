@@ -49,6 +49,25 @@ public class DialogueGraphView : GraphView
         {
             CreateNodeView(topic);
         }
+
+        foreach (Dialogue topic in dlgs)
+        {
+            if (topic.NextDialogueOptions.Count > 0)
+            {
+                NodeView currTopicNode = GetNodeByGuid(topic.guid) as NodeView;
+
+                foreach (Dialogue connection in topic.NextDialogueOptions)
+                {
+                    NodeView connectionNode = GetNodeByGuid(connection.guid) as NodeView;
+
+                    Edge connectedEdge = currTopicNode.oPort.ConnectTo(connectionNode.iPort);
+                    AddElement(connectedEdge);
+                }
+            }
+
+        }
+
+
         #endregion
         //currentDlgRoot.StartingTopics.ForEach(dlg => CreateNodeView(dlg));
 
