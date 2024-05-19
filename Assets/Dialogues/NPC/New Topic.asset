@@ -52,6 +52,31 @@ MonoBehaviour:
   dialogueEndEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-327100172504993321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: New Dialogue Entry 0
+  m_EditorClassIdentifier: 
+  guid: 80778c55b76c67e4cae55db855a069c0
+  EditorPosition: {x: 0, y: 0}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-114120653605199285
 MonoBehaviour:
   m_ObjectHideFlags: 0

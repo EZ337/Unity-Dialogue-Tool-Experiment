@@ -37,6 +37,8 @@ public class DialogueEditorWindow : EditorWindow
         dlgInspectorView = root.Q<InspectorView>();
         dlgRootLabel = root.Q<Label>("root-owner");
 
+        dlgGraphView.NodeSelectAction = OnNodeSelectionChange;
+
         OnSelectionChange();
     }
 
@@ -111,7 +113,8 @@ public class DialogueEditorWindow : EditorWindow
                     dlgRootLabel.text = dlgRoot.name + " > " + dlgRoot.TopicName;
                     dlgGraphView.SetEnabled(true);
                     dlgGraphView.PopulateView(dlgRoot);
-                    dlgInspectorView.PopulateDialogueInspector(charDlg.DialogueTopics);
+                    // Populate Second Inpsector View for the characterDlg
+                    //dlgInspectorView.PopulateDialogueInspector(charDlg.DialogueTopics);
                     return;
                 }
 
@@ -123,4 +126,9 @@ public class DialogueEditorWindow : EditorWindow
         dlgGraphView.SetEnabled(false);
     }
     #endregion
+
+    private void OnNodeSelectionChange(NodeView nodeView)
+    {
+        dlgInspectorView.UpdateSelection(nodeView);
+    }
 }

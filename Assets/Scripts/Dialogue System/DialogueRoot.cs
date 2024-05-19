@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.Collections;
 
 //[CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
 public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>

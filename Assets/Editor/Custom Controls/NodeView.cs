@@ -9,6 +9,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Dialogue dlg;
     public Port iPort;
     public Port oPort;
+    public Action<NodeView> NodeSelectAction;
 
     public NodeView(Dialogue dlg)
     {
@@ -47,5 +48,6 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public override void OnSelected()
     {
         base.OnSelected();
+        NodeSelectAction?.Invoke(this);
     }
 }

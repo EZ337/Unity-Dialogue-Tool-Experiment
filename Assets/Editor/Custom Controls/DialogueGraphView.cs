@@ -15,6 +15,7 @@ public class DialogueGraphView : GraphView
     /// The current Dialogue Root being edited
     /// </summary>
     private DialogueRoot currentDlgRoot;
+    public Action<NodeView> NodeSelectAction;
 
     public DialogueGraphView() 
     {
@@ -133,6 +134,7 @@ public class DialogueGraphView : GraphView
         if (dlg != null)
         {
             NodeView nodeView = new NodeView(dlg);
+            nodeView.NodeSelectAction = NodeSelectAction;
             AddElement(nodeView);
             return true;
         }

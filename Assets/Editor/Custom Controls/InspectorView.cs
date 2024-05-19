@@ -1,35 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UIElements;
+
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 public class InspectorView : VisualElement
 {
-    private List<DialogueRoot> charDialogues = new();
-    private ListView dlgRootsView;
     public new class UxmlFactory : UxmlFactory<InspectorView, InspectorView.UxmlTraits> { }
+    private Editor editor;
     public InspectorView() 
     {
-        dlgRootsView = this.Q<ListView>("dlg-roots-view");
     }
 
-    public void PopulateDialogueInspector(List<DialogueRoot> dialogueRoots)
+    /// <summary>
+    /// Function called when we select a new node in the graphView
+    /// </summary>
+    /// <param name="nodeView">The node we selected</param>
+    public void UpdateSelection(NodeView nodeView)
     {
+        Clear();
+        UnityEngine.Object.DestroyImmediate(editor);
+        editor = Editor.CreateEditor(nodeView.dlg);
+        IMGUIContainer iMGUIContainer = new IMGUIContainer(() => { editor.OnInspectorGUI(); });
+        Add(iMGUIContainer);
 
-        if (dlgRootsView == null)
-        {
-            Debug.LogWarning("Failed to get the dlgRootsView. Fixing...");
-            dlgRootsView = this.Q<ListView>("dlg-roots-view");
-            if (dlgRootsView == null)
-            {
-                Debug.LogError("Failed to acquire The list view in the Dialogue Editor in the Inspector");
-                return;
-            }
-        }
-
-
+        EditorGUIUtility.PingObject(nodeView.dlg);
     }
 }
