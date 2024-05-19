@@ -7,48 +7,23 @@ using UnityEditor;
 //[CreateAssetMenu(fileName ="New Dialogue Branch", menuName = "Dialogue System/Dialogue Root")]
 public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 {
-    [SerializeField, Tooltip("The name of this dialogue tree")]
-    private string topicName;
+    [field: SerializeField, Tooltip("The name of this dialogue tree")]
+    public string TopicName { get; private set; }
 
-    [SerializeField, Tooltip("The first dialogue option that constitutes this dialogue tree")]
-    private List<Dialogue >startingTopics = new();
+    [field : SerializeField, Tooltip("The first dialogue option that constitutes this dialogue tree")]
+    public List<Dialogue> StartingTopics { get; private set; } = new();
 
-    [SerializeField, Tooltip("The type of dialogue we are leading to")]
-    private DialogueType dlgType;
+    [field: SerializeField, Tooltip("The type of dialogue we are leading to")]
+    public DialogueType DlgType { get; private set; }
 
-    [SerializeField, Tooltip("Sorting order for the dialogues")]
-    private int priority;
-
-
-    #region Properties
-
-    /// <summary>
-    /// The starting topic for this main branch
-    /// </summary>
-    public List<Dialogue> StartingTopics { get => startingTopics; set => startingTopics = value; }
-
-    /// <summary>
-    /// The type of dialogue. Preempt will block all other dialogues until its condition is false.
-    /// </summary>
-    public DialogueType DlgType { get => dlgType; set => dlgType = value; }
-
-    /// <summary>
-    /// Sorting order for dialogues
-    /// </summary>
-    public int Priority { get => priority; set => priority = value; }
-
-    /// <summary>
-    /// The "id" of this 
-    /// </summary>
-    public string TopicName { get => topicName; set => topicName = value; }
-
-    #endregion
+    [field : SerializeField, Tooltip("Sorting order for the dialogues")]
+    public int Priority { get; private set; }
 
     public void Initialise(string  topicName, DialogueType dlgType, int priority)
     {
-        this.topicName = topicName;
-        this.dlgType = dlgType;
-        this.priority = priority;
+        this.TopicName = topicName;
+        this.DlgType = dlgType;
+        this.Priority = priority;
     }
 
     #region GraphView Stuff
@@ -62,7 +37,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
 
         if (isStartingTopic )
         {
-            startingTopics.Add(dlg);
+            StartingTopics.Add(dlg);
             dlg.IsStartingTopic = true;
         }
 
@@ -110,7 +85,7 @@ public class DialogueRoot : ScriptableObject, IComparable<DialogueRoot>
     /// <returns><0 if this preceeds other. 0 if equal in ordering, and >0 if after other</returns>
     public int CompareTo(DialogueRoot other)
     {
-        return this.priority.CompareTo(other.priority);
+        return this.Priority.CompareTo(other.Priority);
     }
 }
 

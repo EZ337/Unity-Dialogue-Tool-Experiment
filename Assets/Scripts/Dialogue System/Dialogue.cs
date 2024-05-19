@@ -7,42 +7,40 @@ public class Dialogue : ScriptableObject
 {
     [HideInInspector] public string guid;
     [HideInInspector] public Vector2 EditorPosition;
-    private DialogueRoot root;
 
-    private bool isStartingTopic = false;
+    [field : SerializeField]
+    public DialogueRoot Root { get; set; }
 
-    [SerializeField, Tooltip("The text the player will say")]
-    private string playerPrompt;
+    [field : SerializeField] 
+    public bool IsStartingTopic { get; set; } = false;
 
-    [SerializeField, Tooltip("Sequence of responses to this prompt")]
-    private DialogueResponse[] responses;
+    /// <summary>
+    /// The dialogue piece the player will say
+    /// </summary>
+    [field: SerializeField, Tooltip("The text the player will say")]
+    public string PlayerPrompt { get; private set; }
+
+    /// <summary>
+    /// List of responses the NPC will say when player picks this option. Says all of them sequentially according to conditions
+    /// </summary>
+    [field: SerializeField, Tooltip("Sequence of responses to this prompt")]
+    public DialogueResponse[] Responses { get; private set; }
 
     // Flags
 
-    [SerializeField, Tooltip("The next dialogue options the player will have to select from")]
-    private List<Dialogue> nextDialogueOptions = new List<Dialogue>();
+    /// <summary>
+    /// The next dialogue options the player will have to select from
+    /// </summary>
+
+    [field : SerializeField, Tooltip("The next dialogue options the player will have to select from")]
+    public List<Dialogue> NextDialogueOptions { get; private set; } = new List<Dialogue>();
 
     // Conditions
 
     [SerializeField, Tooltip("Event Called when this topic is first interacted with")]
     private UnityEvent dialogueBeginEvent;
+
     [SerializeField, Tooltip("Event called when we finish this dialogue")]
     private UnityEvent dialogueEndEvent;
 
-    /// <summary>
-    /// The dialogue piece the player will say
-    /// </summary>
-    public string PlayerPrompt { get => playerPrompt; set => playerPrompt = value; }
-
-    /// <summary>
-    /// List of responses the NPC will say when player picks this option. Says all of them sequentially according to conditions
-    /// </summary>
-    public DialogueResponse[] Responses { get => responses; set => responses = value; }
-
-    /// <summary>
-    /// The next dialogue options the player will have to select from
-    /// </summary>
-    public List<Dialogue> NextDialogueOptions { get => nextDialogueOptions; set => nextDialogueOptions = value; }
-    public bool IsStartingTopic { get => isStartingTopic; set => isStartingTopic = value; }
-    public DialogueRoot Root { get => root; set => root = value; }
 }

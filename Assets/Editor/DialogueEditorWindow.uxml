@@ -5,9 +5,9 @@
     </uie:Toolbar>
     <SplitView fixed-pane-initial-dimension="200">
         <ui:VisualElement name="left-panel" style="flex-grow: 1;">
-            <InspectorView>
+            <InspectorView name="char-dialogue">
                 <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37);" />
-                <ui:ListView focusable="true" binding-path="charDialogues" name="dlg-roots-view" show-foldout-header="true" />
+                <ui:ListView focusable="true" binding-path="charDialogues" name="dlg-roots-view" show-foldout-header="true" style="height: 20px;" />
             </InspectorView>
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" style="flex-grow: 1;">

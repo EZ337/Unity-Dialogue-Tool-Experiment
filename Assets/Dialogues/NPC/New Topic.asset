@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 8
   m_EditorClassIdentifier: 
   guid: 428c98fc0300544418bb952668c4cef3
-  EditorPosition: {x: 0, y: 0}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions: []
+  EditorPosition: {x: 17.333344, y: 213.62666}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
+  - {fileID: 4215443937165137361}
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -37,9 +40,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: fd533ed33a333894b91149ecc9de914e
   EditorPosition: {x: 306.659, y: -53.96265}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions:
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
   - {fileID: -114120653605199285}
   dialogueBeginEvent:
     m_PersistentCalls:
@@ -61,9 +66,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: 7dd2f280ab9f6794397346934cbaa2c7
   EditorPosition: {x: 621.28015, y: 11.660039}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions: []
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -82,11 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
   m_Name: New Topic
   m_EditorClassIdentifier: 
-  topicName: New Topic
-  startingTopics:
+  <TopicName>k__BackingField: 
+  <StartingTopics>k__BackingField:
   - {fileID: 5772957346007580799}
-  dlgType: 0
-  priority: 0
+  <DlgType>k__BackingField: 0
+  <Priority>k__BackingField: 0
 --- !u!114 &4215443937165137361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,9 +108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: 45bf6398265399a44b827ba734e2edda
   EditorPosition: {x: 357.9632, y: 151.58055}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions: []
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -124,11 +133,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: e83ee734d2f905e4096f8ea57ea1a758
   EditorPosition: {x: -30.595997, y: 15.158069}
-  playerPrompt: 
-  responses: []
-  nextDialogueOptions:
-  - {fileID: -4406946239338065321}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 1
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
   - {fileID: 4215443937165137361}
+  - {fileID: -4406946239338065321}
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
