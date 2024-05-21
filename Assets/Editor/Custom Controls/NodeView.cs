@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
@@ -42,7 +44,8 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         base.SetPosition(newPos);
         dlg.EditorPosition.x = newPos.xMin;
-        dlg.EditorPosition.y = newPos.yMin;  
+        dlg.EditorPosition.y = newPos.yMin;
+        EditorUtility.SetDirty(dlg);
     }
 
     public override void OnSelected()

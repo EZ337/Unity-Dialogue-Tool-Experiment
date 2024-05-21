@@ -42,17 +42,17 @@ public class DialogueEditorWindow : EditorWindow
         OnSelectionChange();
     }
 
-    //[OnOpenAsset]
-    //public static bool OnOpenAsset(int instannceId, int line)
-    //{
-    //    if ()
-    //    {
-    //        ShowWindow();
-    //        return true;
-    //    }
+    [OnOpenAsset]
+    public static bool OnOpenAsset(int instannceId, int line)
+    {
+        if (Selection.activeObject is Dialogue || Selection.activeObject is DialogueRoot)
+        {
+            ShowWindow();
+            return true;
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 
     #region Needs Revision to be when we select a dlg Root
     private void OnSelectionChange()

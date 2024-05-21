@@ -83,15 +83,13 @@ public class DialogueGraphView : GraphView
     {
         graphViewChange.elementsToRemove?.ForEach(elem =>
         {
-            NodeView nodeview = elem as NodeView;
-            if (nodeview != null)
+            if (elem is NodeView nodeview)
             {
                 // Delete a topic
                 currentDlgRoot.DeleteTopic(nodeview.dlg);
             }
 
-            Edge edge = elem as Edge;
-            if (edge != null)
+            if (elem is Edge edge)
             {
                 NodeView start = edge.output.node as NodeView;
                 NodeView end = edge.input.node as NodeView;
@@ -110,6 +108,8 @@ public class DialogueGraphView : GraphView
                 currentDlgRoot.ConnectDialogue(((NodeView)edge.output.node).dlg, ((NodeView)edge.input.node).dlg);
             });
         }
+
+        EditorUtility.SetDirty(currentDlgRoot);
 
         return graphViewChange;
     }
