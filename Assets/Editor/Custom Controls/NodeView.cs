@@ -13,7 +13,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Port oPort;
     public Action<NodeView> NodeSelectAction;
 
-    public NodeView(Dialogue dlg)
+    public NodeView(Dialogue dlg) : base("Assets/Editor/NodeView.uxml")
     {
         this.dlg = dlg;
         this.title = dlg.name;
@@ -31,12 +31,16 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         if (dlg.IsStartingTopic)
             return;
 
-        iPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(Dialogue));
+        iPort = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi, typeof(Dialogue));
+        iPort.portName = "";
+        iPort.style.flexDirection = FlexDirection.Column;
         inputContainer.Add(iPort);
     }
     private void CreateOutputPort()
     {
-        oPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(Dialogue));
+        oPort = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(Dialogue));
+        oPort.portName = "";
+        oPort.style.flexDirection = FlexDirection.ColumnReverse;
         outputContainer.Add(oPort);
     }
 

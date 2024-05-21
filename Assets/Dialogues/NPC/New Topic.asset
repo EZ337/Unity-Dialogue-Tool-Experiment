@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 8
   m_EditorClassIdentifier: 
   guid: 428c98fc0300544418bb952668c4cef3
-  EditorPosition: {x: 17.333344, y: 213.62666}
+  EditorPosition: {x: 465.3387, y: -227.8148}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -39,38 +39,13 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 6
   m_EditorClassIdentifier: 
   guid: fd533ed33a333894b91149ecc9de914e
-  EditorPosition: {x: 306.659, y: -53.96265}
+  EditorPosition: {x: 177.65335, y: -111.95335}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
   <Responses>k__BackingField: []
   <NextDialogueOptions>k__BackingField:
   - {fileID: -114120653605199285}
-  dialogueBeginEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  dialogueEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &-327100172504993321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 0
-  m_EditorClassIdentifier: 
-  guid: 80778c55b76c67e4cae55db855a069c0
-  EditorPosition: {x: 0, y: 0}
-  <Root>k__BackingField: {fileID: 11400000}
-  <IsStartingTopic>k__BackingField: 0
-  <PlayerPrompt>k__BackingField: 
-  <Responses>k__BackingField: []
-  <NextDialogueOptions>k__BackingField: []
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -90,7 +65,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 7
   m_EditorClassIdentifier: 
   guid: 7dd2f280ab9f6794397346934cbaa2c7
-  EditorPosition: {x: 621.28015, y: 11.660039}
+  EditorPosition: {x: 176.34004, y: 32.11642}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -132,7 +107,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 5
   m_EditorClassIdentifier: 
   guid: 45bf6398265399a44b827ba734e2edda
-  EditorPosition: {x: 357.9632, y: 151.58055}
+  EditorPosition: {x: 324.35992, y: -110.52839}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -157,7 +132,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 4
   m_EditorClassIdentifier: 
   guid: e83ee734d2f905e4096f8ea57ea1a758
-  EditorPosition: {x: -30.595997, y: 15.158069}
+  EditorPosition: {x: 250.00005, y: -312.90668}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 1
   <PlayerPrompt>k__BackingField: 
@@ -165,6 +140,7 @@ MonoBehaviour:
   <NextDialogueOptions>k__BackingField:
   - {fileID: 4215443937165137361}
   - {fileID: -4406946239338065321}
+  - {fileID: -7375234388082470486}
   dialogueBeginEvent:
     m_PersistentCalls:
       m_Calls: []
