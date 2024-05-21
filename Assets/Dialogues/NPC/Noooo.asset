@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 8
+  m_Name: We
   m_EditorClassIdentifier: 
   guid: 428c98fc0300544418bb952668c4cef3
   EditorPosition: {x: 465.3387, y: -227.8148}
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 6
+  m_Name: Rewrite
   m_EditorClassIdentifier: 
   guid: fd533ed33a333894b91149ecc9de914e
   EditorPosition: {x: 177.65335, y: -111.95335}
@@ -62,10 +62,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 7
+  m_Name: Stars
   m_EditorClassIdentifier: 
   guid: 7dd2f280ab9f6794397346934cbaa2c7
-  EditorPosition: {x: 176.34004, y: 32.11642}
+  EditorPosition: {x: 185.33333, y: 8}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
-  m_Name: New Topic
+  m_Name: Noooo
   m_EditorClassIdentifier: 
   <TopicName>k__BackingField: 
   <StartingTopics>k__BackingField:
@@ -104,10 +104,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 5
+  m_Name: The
   m_EditorClassIdentifier: 
   guid: 45bf6398265399a44b827ba734e2edda
-  EditorPosition: {x: 324.35992, y: -110.52839}
+  EditorPosition: {x: 340.6667, y: -112}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
-  m_Name: New Dialogue Entry 4
+  m_Name: Whatf
   m_EditorClassIdentifier: 
   guid: e83ee734d2f905e4096f8ea57ea1a758
   EditorPosition: {x: 250.00005, y: -312.90668}

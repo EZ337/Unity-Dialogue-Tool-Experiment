@@ -12,6 +12,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Port iPort;
     public Port oPort;
     public Action<NodeView> NodeSelectAction;
+    public TextField TopicNameField;
 
     public NodeView(Dialogue dlg) : base("Assets/Editor/NodeView.uxml")
     {
@@ -23,6 +24,10 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
         CreateInputPort();
         CreateOutputPort();
+
+        TopicNameField = this.Q<TextField>("topic-name");
+        TopicNameField.value = this.title;
+        TopicNameField.RegisterCallback<FocusOutEvent>( (evt) => ChangeName(TopicNameField.value));
     }
 
 
@@ -56,5 +61,16 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         base.OnSelected();
         NodeSelectAction?.Invoke(this);
+    }
+
+    public void ChangeName(string name)
+    {
+        dlg.name = name;
+        this.title = name;
+
+        // Rename the actual asset
+        AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(dlg) + "/" + dlg.name, name);
+        EditorUtility.SetDirty(dlg);
+        AssetDatabase.SaveAssets();
     }
 }
