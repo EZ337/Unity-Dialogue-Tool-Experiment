@@ -1,5 +1,4 @@
 #node-border {
-    background-color: rgb(56, 56, 56);
     border-left-color: rgb(47, 47, 47);
     border-right-color: rgb(47, 47, 47);
     border-top-color: rgb(47, 47, 47);
@@ -12,10 +11,12 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    background-color: rgb(56, 56, 56);
 }
 
 #input {
     align-items: center;
+    min-height: 24px;
 }
 
 #output {
@@ -42,6 +43,11 @@
     bottom: 0;
 }
 
+#divider {
+    min-height: 1px;
+    background-color: rgb(82, 82, 82);
+}
+
 :hover#selection-border {
     border-top-width: 1px;
     border-right-width: 1px;
@@ -65,4 +71,17 @@
 
 .node {
     min-width: 150px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.dlg-preempt {
+    background-color: rgb(255, 198, 198);
+}
+
+.dlg-greet {
+    background-color: rgb(100, 255, 131);
+}
+
+.dlg-norm {
+    background-color: rgb(255, 228, 136);
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: We
   m_EditorClassIdentifier: 
   guid: 428c98fc0300544418bb952668c4cef3
-  EditorPosition: {x: 465.3387, y: -227.8148}
+  EditorPosition: {x: 440.95822, y: -198.77805}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Name: Rewrite
   m_EditorClassIdentifier: 
   guid: fd533ed33a333894b91149ecc9de914e
-  EditorPosition: {x: 177.65335, y: -111.95335}
+  EditorPosition: {x: 186.86671, y: -97.8667}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: Stars
   m_EditorClassIdentifier: 
   guid: 7dd2f280ab9f6794397346934cbaa2c7
-  EditorPosition: {x: 185.33333, y: 8}
+  EditorPosition: {x: 186.66666, y: 21.333344}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -87,12 +87,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
-  m_Name: Noooo
+  m_Name: Hehehe
   m_EditorClassIdentifier: 
   <TopicName>k__BackingField: 
   <StartingTopics>k__BackingField:
   - {fileID: 5772957346007580799}
-  <DlgType>k__BackingField: 0
+  <DlgType>k__BackingField: 1
   <Priority>k__BackingField: 0
 --- !u!114 &4215443937165137361
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: The
   m_EditorClassIdentifier: 
   guid: 45bf6398265399a44b827ba734e2edda
-  EditorPosition: {x: 340.6667, y: -112}
+  EditorPosition: {x: 370.18024, y: -95.95892}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: Whatf
   m_EditorClassIdentifier: 
   guid: e83ee734d2f905e4096f8ea57ea1a758
-  EditorPosition: {x: 250.00005, y: -312.90668}
+  EditorPosition: {x: 257.43332, y: -310.3667}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 1
   <PlayerPrompt>k__BackingField: 

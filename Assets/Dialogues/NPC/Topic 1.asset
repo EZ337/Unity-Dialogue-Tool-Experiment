@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 1
   m_EditorClassIdentifier: 
   guid: bdd04170c2c3e0f4ea6e5a2e150b7c60
-  EditorPosition: {x: 315.32806, y: -23.320108}
+  EditorPosition: {x: 371.82993, y: -38.063324}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 3
   m_EditorClassIdentifier: 
   guid: 84c33ee67933eb84ab177060231c6e24
-  EditorPosition: {x: 306.34464, y: 95.58117}
+  EditorPosition: {x: 179.70004, y: -40.68665}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: New Dialogue Entry 0
   m_EditorClassIdentifier: 
   guid: 84b822af231da8c4ab681c3b041165b6
-  EditorPosition: {x: 0, y: 0}
+  EditorPosition: {x: 261.92004, y: -217.70667}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 1
   <PlayerPrompt>k__BackingField: 

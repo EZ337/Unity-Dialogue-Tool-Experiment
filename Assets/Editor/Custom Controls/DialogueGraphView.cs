@@ -135,6 +135,33 @@ public class DialogueGraphView : GraphView
         {
             NodeView nodeView = new NodeView(dlg);
             nodeView.NodeSelectAction = NodeSelectAction;
+
+            // Add uss class depending if this is a root 
+            if (dlg.IsStartingTopic)
+            {
+                // Since I am using DlgTypes, This tag is unused for now
+                nodeView.AddToClassList("start-dlg");
+
+                // Now modify all starting topics depending on dlgType
+                // This is used to give the Starting Topics a different colouring
+                switch (dlg.Root.DlgType)
+                {
+                    case DialogueType.Normal:
+                        nodeView.AddToClassList("dlg-norm");
+                        break;
+                    case DialogueType.Preempt:
+                        nodeView.AddToClassList("dlg-preempt");
+                        break;
+                    case DialogueType.Greeting:
+                        nodeView.AddToClassList("dlg-greet");
+                        break;
+                }
+            }
+            else
+            {
+                nodeView.AddToClassList("regular-topic");
+            }
+
             AddElement(nodeView);
             return true;
         }
