@@ -28,7 +28,7 @@ public class DialogueEditorWindow : EditorWindow
         // Import UXML
         if (visualTree == null)
         {
-            visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/DialogueEditorWindow.uxml");
+            visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/Editor/DialogueEditorWindow.uxml");
         }
         visualTree.CloneTree(root);
 

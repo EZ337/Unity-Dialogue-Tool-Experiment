@@ -28,7 +28,7 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(new RectangleSelector());
 
         // Stylesheet
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/DialogueEditorWindow.uss");
+        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/Editor/DialogueEditorWindow.uss");
         styleSheets.Add(styleSheet);
     }
 

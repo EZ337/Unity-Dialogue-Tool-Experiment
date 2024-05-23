@@ -1,0 +1,174 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5779687720675823655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Option2
+  m_EditorClassIdentifier: 
+  guid: 0f187d759a3fcbe4f9e833639cc7956d
+  EditorPosition: {x: 417.33337, y: 174.66669}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
+  - {fileID: -4134515038177561227}
+  - {fileID: -1510744486008811063}
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-4134515038177561227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Option2a
+  m_EditorClassIdentifier: 
+  guid: de1e0aa77d4dacd45899de415efbb6a4
+  EditorPosition: {x: 326.6667, y: 309.3333}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2535754038885494464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Option1
+  m_EditorClassIdentifier: 
+  guid: 834dd00d19e31a245ad6c8eec10a203c
+  EditorPosition: {x: 209.33334, y: 178.23999}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
+  - {fileID: 3366964489370584683}
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-1510744486008811063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Option2b
+  m_EditorClassIdentifier: 
+  guid: 8c53e0473d9729f4eb592414a71a091c
+  EditorPosition: {x: 491.3333, y: 305.33334}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef7861cf3866ca4084c06c8af8aab23, type: 3}
+  m_Name: New Topic
+  m_EditorClassIdentifier: 
+  <TopicName>k__BackingField: New Topic
+  <StartingTopics>k__BackingField:
+  - {fileID: 7810598458828679587}
+  <DlgType>k__BackingField: 0
+  <Priority>k__BackingField: 0
+--- !u!114 &3366964489370584683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Option1a
+  m_EditorClassIdentifier: 
+  guid: ba258b2fba37bcf4ba48e9409052dd5c
+  EditorPosition: {x: 112.000015, y: 316.6667}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 0
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField: []
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7810598458828679587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357e2743f5e0d9e42a3166ebe302f1f4, type: 3}
+  m_Name: Starting Dialogue
+  m_EditorClassIdentifier: 
+  guid: 0a63a1442e438394cb9b667599ea7c8a
+  EditorPosition: {x: 288.6667, y: 2}
+  <Root>k__BackingField: {fileID: 11400000}
+  <IsStartingTopic>k__BackingField: 1
+  <PlayerPrompt>k__BackingField: 
+  <Responses>k__BackingField: []
+  <NextDialogueOptions>k__BackingField:
+  - {fileID: -2535754038885494464}
+  - {fileID: -5779687720675823655}
+  dialogueBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dialogueEndEvent:
+    m_PersistentCalls:
+      m_Calls: []

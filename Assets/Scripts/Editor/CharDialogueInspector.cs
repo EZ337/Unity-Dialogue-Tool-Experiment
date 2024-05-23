@@ -56,6 +56,11 @@ public class CharDialogueInspector : Editor
         string targetPath = $"Assets/Dialogues/{this.target.name}/";
 
         // Create directory if it doesn't exist
+        if (!AssetDatabase.IsValidFolder("Assets/Dialogues/"))
+        {
+            AssetDatabase.CreateFolder("Assets", "Dialogues");
+        }
+
         if (!AssetDatabase.IsValidFolder(targetPath))
         {
             AssetDatabase.CreateFolder("Assets/Dialogues", this.target.name);

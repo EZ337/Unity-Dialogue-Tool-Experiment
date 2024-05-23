@@ -4,9 +4,9 @@
             <ui:TextField picking-mode="Ignore" label="Topic Name" value="New Topic" name="topic-name" binding-path="topicName" />
             <ui:EnumField label="Dialogue Type" type="DialogueType, Assembly-CSharp" name="dlg-type-enum" />
             <ui:IntegerField label="Priority" value="0" name="dlg-priority" />
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: center; align-self: auto;">
-                <ui:Button text="Create New Dialogue Root" parse-escape-sequences="true" display-tooltip-when-elided="true" view-data-key="create-btn" name="create-dlg-btn" />
-                <ui:Button text="Open Dialogue Editor" parse-escape-sequences="true" display-tooltip-when-elided="true" name="open-dlg-btn" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: center; align-self: auto; padding-top: 10px;">
+                <ui:Button text="Create New Dialogue Root" parse-escape-sequences="true" display-tooltip-when-elided="true" view-data-key="create-btn" name="create-dlg-btn" style="height: 50px;" />
+                <ui:Button text="Open Dialogue Editor" parse-escape-sequences="true" display-tooltip-when-elided="true" name="open-dlg-btn" style="height: 50px;" />
             </ui:VisualElement>
         </ui:Foldout>
     </ui:VisualElement>
