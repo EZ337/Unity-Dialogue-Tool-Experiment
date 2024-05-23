@@ -14,7 +14,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Action<NodeView> NodeSelectAction;
     public TextField TopicNameField;
 
-    public NodeView(Dialogue dlg) : base("Assets/Scripts/Editor/NodeView.uxml")
+    public NodeView(Dialogue dlg) : base("Assets/Scripts/Editor/Dialogue System/NodeView.uxml")
     {
         this.dlg = dlg;
         this.title = dlg.name;

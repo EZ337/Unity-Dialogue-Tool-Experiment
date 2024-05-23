@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: may have
   m_EditorClassIdentifier: 
   guid: 249ac6f64c419c748bcf8986c1620d5e
-  EditorPosition: {x: 583.3333, y: 275.01337}
+  EditorPosition: {x: 591.6, y: 274}
   <Root>k__BackingField: {fileID: 11400000}
   <IsStartingTopic>k__BackingField: 0
   <PlayerPrompt>k__BackingField: 

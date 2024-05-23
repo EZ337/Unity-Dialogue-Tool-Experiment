@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <Style src="project://database/Assets/Scripts/Editor/NodeView.uss?fileID=7433441132597879392&amp;guid=daa9fcfa47431bc41b7ba9de75703a36&amp;type=3#NodeView" />
+    <Style src="project://database/Assets/Scripts/Editor/Dialogue System/NodeView.uss?fileID=7433441132597879392&amp;guid=daa9fcfa47431bc41b7ba9de75703a36&amp;type=3#NodeView" />
     <ui:VisualElement name="node-border">
         <ui:VisualElement name="contents">
             <ui:VisualElement name="top">
