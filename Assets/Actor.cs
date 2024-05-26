@@ -12,7 +12,7 @@ public class Actor : MonoBehaviour
     [field: SerializeField]
     public bool IsDead { get; private set; }
 
-    [Condition(typeof(Actor))]
+
     [field: SerializeField]
     public Actor Me { get; private set; }
 

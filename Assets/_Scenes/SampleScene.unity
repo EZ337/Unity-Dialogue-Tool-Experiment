@@ -477,9 +477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07de24d3c9fc52f469072578cf662d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Level>k__BackingField: 5
+  <Level>k__BackingField: 50
   <IsDead>k__BackingField: 0
-  <Me>k__BackingField: {fileID: 0}
+  <Me>k__BackingField: {fileID: 764912000}
 --- !u!135 &764912001
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -925,6 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 528c933daf26c454d928edc988327011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionPredicate: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

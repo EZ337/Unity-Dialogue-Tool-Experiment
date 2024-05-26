@@ -44,6 +44,7 @@ public class Condition : MonoBehaviour
 
 public enum ConditionPredicate
 {
+    None,
     GetLevel,
     GetIsDead,
     GetGlobalVariable,
