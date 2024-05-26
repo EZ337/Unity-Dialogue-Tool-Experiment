@@ -8,43 +8,63 @@ using Unity.VisualScripting;
 using System;
 using System.Reflection;
 using System.Linq;
+using PlasticGui;
 
 [CustomEditor(typeof(Condition))]
 public class ConditionEditor : Editor
 {
 
     public VisualTreeAsset VisualTree;
-    public EnumField predicateField;
+    public DropdownField conditionField;
     public EnumField comparatorField;
-    public ObjectField obj;
+    public ObjectField param1Field;
     public IntegerField intCompare;
+    public FloatField floatCompare;
+    public TextField stringCompare;
+    public Toggle boolCompare;
+    public ObjectField param2Field;
     public Button compareBtn;
-    public DropdownField conditionFunctionField;
+
+    private List<MemberInfo> methods = new List<MemberInfo>();
+    private MemberInfo selectedMethod;
+    private VisualElement selectedArgument;
 
     public override VisualElement CreateInspectorGUI()
     {
         VisualElement root = new VisualElement();
         VisualTree.CloneTree(root);
 
-        // Find the EnumField and bind it to the serialized property
-        predicateField = root.Q<EnumField>("predicate");
-        comparatorField = root.Q<EnumField>("comparator");
-        compareBtn = root.Q<Button>("evaluateCondition");
-        obj = root.Q<ObjectField>("param1");
-        intCompare = root.Q<IntegerField>("int-compare");
-        compareBtn.RegisterCallback<ClickEvent>(EvaluateCondition);
-        conditionFunctionField = root.Q<DropdownField>("cond-func");
 
-        // Picking the predicate changes the objectType of param1
-        // This event handles that.
-        predicateField.RegisterValueChangedCallback(OnPredicateChange);
-        obj.RegisterValueChangedCallback(OnObjectChange);
+        param1Field = root.Q<ObjectField>("param1");
+        conditionField = root.Q<DropdownField>("cond-func");
+        comparatorField = root.Q<EnumField>("comparator");
+        intCompare = root.Q<IntegerField>("int-compare");
+        floatCompare = root.Q<FloatField>("float-compare");
+        stringCompare = root.Q<TextField>("string-compare");
+        boolCompare = root.Q<Toggle>("bool-compare");
+        param2Field = root.Q<ObjectField>("param2");
+
+        compareBtn = root.Q<Button>("evaluateCondition");
+        compareBtn.RegisterCallback<ClickEvent>(EvaluateCondition);
+
+        param1Field.RegisterValueChangedCallback(OnObjectChange);
+        conditionField.RegisterValueChangedCallback(OnConditionFunctionChange);
+
         HideAllOptions();
+        ShowElement(param1Field);
+
 
         return root;
     }
 
-    private void PopulateConditions(Component component)
+
+
+    /// <summary>
+    /// Gets all valid MethodInfo and PropertyInfos that are public, private, or protected
+    /// AND have the [Condition] attribute on them
+    /// </summary>
+    /// <param name="component">The object we are querying</param>
+    private void PopulateConditions(UnityEngine.Object component)
     {
         // Get all methods and properties with ConditionAttribute
         List<MemberInfo> members = component.GetType()
@@ -53,96 +73,194 @@ public class ConditionEditor : Editor
                              member.GetCustomAttribute<ConditionAttribute>() != null)
             .ToList();
 
-        // Debug or handle members with ConditionAttribute
+        // Put all valid methods into the methods list
         foreach (var member in members)
         {
-            if (member is MethodInfo method)
+            // Disabled to just keep property and methods together.
+            /*
+            MethodInfo methodInfo = member as MethodInfo;
+            //Debug.Log("MethodInfo: " + methodInfo);
+            if (member is PropertyInfo property)
+            {
+                // Properties are converted to methodInfo
+                methodInfo = ((PropertyInfo)member).GetMethod;
+
+                //Debug.Log("Property with ConditionAttribute: " + property.Name);
+                //Debug.Log("Property as Method: " + methodInfo);
+            }
+            
+            else if (member is MethodInfo method)
             {
                 Debug.Log("Method with ConditionAttribute: " + method.Name);
             }
-            else if (member is PropertyInfo property)
-            {
-                Debug.Log("Property with ConditionAttribute: " + property.Name);
-            }
+            */
 
-            conditionFunctionField.choices.Add(component.GetType() + "/" + member.Name);
+            conditionField.choices.Add(component.GetType() + "/" + member.Name);
+            methods.Add(member);
         }
 
     }
 
+    /// <summary>
+    /// Event called when the ObjectField changes value
+    /// </summary>
+    /// <param name="evt"></param>
     private void OnObjectChange(ChangeEvent<UnityEngine.Object> evt)
     {
-
-        if (evt.newValue.GetType() == typeof(GameObject))
+        if (evt.newValue != null)
         {
-            //Debug.Log("We got a gameObject");
-            GameObject go = (GameObject) obj.value;
-            Component[] components = go.GetComponents<Component>();
-            conditionFunctionField.choices.Clear();
+            ShowElement(conditionField);
+            // Clear Dropdown and Methods list
+            ClearDropDown();
 
-            foreach (Component component in components)
+            // If it's a gameObject, get all components on it and get the methods/properties with Condtion Attribute
+            if (evt.newValue.GetType() == typeof(GameObject))
             {
-                //Debug.Log(item);
-                PopulateConditions(component);
+                //Debug.Log("We got a gameObject");
+                // Cast to gameObject and get the components
+                Component[] components = ((GameObject)param1Field.value).GetComponents<Component>();
+
+                foreach (Component component in components)
+                {
+                    //Debug.Log(item);
+                    PopulateConditions(component);
+                }
             }
+            else
+            {
+                PopulateConditions(evt.newValue);
+            }
+
+        }
+        else
+        {
+            HideAllOptions();
         }
 
     }
 
-    private void OnPredicateChange(ChangeEvent<Enum> evt)
+    /// <summary>
+    /// Event called when we pick something in the dropdown
+    /// </summary>
+    /// <param name="evt"></param>
+    private void OnConditionFunctionChange(ChangeEvent<string> evt)
     {
-        switch ((ConditionPredicate) evt.newValue)
+        Debug.Log("Dropdown Value changed");
+        //Debug.Log(evt.newValue
+
+        selectedMethod = methods[conditionField.choices.IndexOf(evt.newValue)];
+        //Debug.Log("Index is " + index);
+        //Debug.Log("MethodInfo at index is " + methods[index]);
+        conditionField.SetValueWithoutNotify(evt.newValue.Replace('/', '.'));
+
+        SetUpConditionWindow(selectedMethod);
+    }
+
+    private void SetUpConditionWindow(MemberInfo method)
+    {
+        ConditionAttribute attr = method.GetCustomAttribute<ConditionAttribute>();
+
+        Type attrType = attr.Param2;
+
+        HideAllOptions();
+        ShowElement(conditionField);
+        // If the attribute type of 
+        if (attrType != null)
         {
-            // GlobalVariable Param1
-            case ConditionPredicate.GetGlobalVariable:
-                Debug.LogWarning("GlobalVariables are not implemented yet. Comeback later");
-                goto default;
+            ShowElement(comparatorField);
 
-            // Actor Param1 
-
-            case ConditionPredicate.GetLevel:
-                SetActorParameter();
-                ShowAllOptions();
-                break;
-            case ConditionPredicate.GetIsDead:
-                SetActorParameter();
-                HideAllOptions();
-                ShowElement(obj);
-                break;
-
-
-
-            default:
-                // Disable the ObjectReference Field
-                HideAllOptions();
-                break;
-
+            if (attrType == typeof(int))
+            {
+                ShowElement(intCompare);
+                selectedArgument = intCompare;
+            }
+            else if (attrType == typeof(float))
+            {
+                ShowElement(floatCompare);
+                selectedArgument = floatCompare;
+            }
+            else if (attrType == typeof(string))
+            {
+                ShowElement(stringCompare);
+                selectedArgument = stringCompare;
+            }
+            else if (attrType ==  typeof(bool))
+            {
+                ShowElement(boolCompare);
+                selectedArgument = boolCompare;
+            }
+            else
+            {
+                ShowElement(param2Field);
+                param2Field.objectType = attrType;
+                selectedArgument = param2Field;
+            }
         }
+
+        ShowElement(compareBtn);
+    }
+
+
+    #region Utility
+    /// <summary>
+    /// Clears the dropdown value and the methods list and selected method
+    /// </summary>
+    private void ClearDropDown()
+    {
+        conditionField.choices.Clear();
+        methods.Clear();
+        selectedMethod = null;
+        selectedArgument = null;
+        conditionField.SetValueWithoutNotify("No Function");
     }
 
     private void EvaluateCondition(ClickEvent evt)
     {
-        ConditionPredicate predicate = (ConditionPredicate) predicateField.value;
-        bool result = false;
-
-        switch (predicate)
+        if (selectedMethod != null)
         {
-            case ConditionPredicate.GetLevel:
-                result = Condition.GetLevel((Actor) obj.value, intCompare.value, (ConditionComparator) comparatorField.value);
-                break;
+            MethodInfo methodInfo;
+            if (selectedMethod is PropertyInfo propertyInfo)
+            {
+                methodInfo = propertyInfo.GetMethod;
+            }
+            else
+            {
+                methodInfo = (MethodInfo)selectedMethod;
+            }
 
-            case ConditionPredicate.GetIsDead:
-                result = Condition.GetDead((Actor)obj.value);
-                break;
+
+            // This section converts the object into the appropriate type that can call this method
+            System.Object callingObject = param1Field.value;
+            if (callingObject is GameObject go)
+            {
+                Type targetType = methodInfo.DeclaringType;
+                foreach (var item in go.GetComponents<Component>())
+                {
+                    if (item.GetType() == targetType)
+                    {
+                        callingObject = item;
+                        break;
+                    }
+                }
+            }
+
+            // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
+            Condition.Evaluate(callingObject, methodInfo, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument));
         }
-
-        Debug.Log($"result is: {result}");
     }
 
-    private void SetActorParameter()
+    private System.Object GetElementValue(VisualElement elm)
     {
-        obj.objectType = typeof(Actor);
-        obj.label = "Actor";
+        if (elm is IntegerField intField)
+            return intField.value;
+        else if (elm is FloatField floatField)
+            return floatField.value;
+        else if (elm is TextField textField)
+            return textField.value;
+        else if (elm is ObjectField objectField)
+            return objectField.value;
+
+        return null;
     }
 
     private void ShowElement(VisualElement elm)
@@ -157,15 +275,28 @@ public class ConditionEditor : Editor
 
     private void ShowAllOptions()
     {
-        obj.style.display = DisplayStyle.Flex;
+        conditionField.style.display = DisplayStyle.Flex;
         intCompare.style.display = DisplayStyle.Flex;
+        floatCompare.style.display = DisplayStyle.Flex;
+        stringCompare.style.display = DisplayStyle.Flex;
+        param2Field.style.display = DisplayStyle.Flex;
+        boolCompare.style.display = DisplayStyle.Flex;
         comparatorField.style.display = DisplayStyle.Flex;
+        compareBtn.style.display = DisplayStyle.Flex;
     }
 
     private void HideAllOptions()
     {
         //obj.style.display = DisplayStyle.None;
+        conditionField.style.display = DisplayStyle.None;
         intCompare.style.display = DisplayStyle.None;
+        floatCompare.style.display = DisplayStyle.None;
+        stringCompare.style.display = DisplayStyle.None;
+        param2Field.style.display = DisplayStyle.None;
+        boolCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
+        compareBtn.style.display = DisplayStyle.None;
     }
+
+    #endregion
 }

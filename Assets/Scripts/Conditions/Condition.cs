@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class Condition : MonoBehaviour
@@ -18,6 +19,17 @@ public class Condition : MonoBehaviour
         return actor.IsDead;
     }
     
+    public static void Evaluate(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
+    {
+        System.Object[] argsList = new System.Object[0];
+        System.Object ret = function.Invoke(obj, argsList);
+        if (ret is IComparable comparableRet && param2 is IComparable comparableParam2)
+        {
+            Debug.Log(comparableRet.CompareTo(comparableParam2));
+        }
+        
+    }
+
     private static bool Compare(int comparison, ConditionComparator comparator)
     {
         switch (comparator)
@@ -38,7 +50,6 @@ public class Condition : MonoBehaviour
 
         return false;
     }
-
 }
 
 public enum ConditionPredicate
