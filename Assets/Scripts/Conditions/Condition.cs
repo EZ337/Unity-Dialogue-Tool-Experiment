@@ -18,7 +18,6 @@ public class Condition : MonoBehaviour
         return actor.IsDead;
     }
     
-
     private static bool Compare(int comparison, ConditionComparator comparator)
     {
         switch (comparator)

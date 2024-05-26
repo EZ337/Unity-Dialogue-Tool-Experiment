@@ -3,5 +3,6 @@
     <uie:ObjectField label="Param 1" name="param1" type="UnityEngine.Object, UnityEngine.CoreModule" />
     <ui:EnumField label="Comparer" type="ConditionComparator, Assembly-CSharp" name="comparator" />
     <ui:IntegerField label="Integer Field" value="42" name="int-compare" />
+    <ui:DropdownField label="Condition Functions" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cond-func" />
     <ui:Button text="Evaluate Condition" parse-escape-sequences="true" display-tooltip-when-elided="true" name="evaluateCondition" />
 </ui:UXML>

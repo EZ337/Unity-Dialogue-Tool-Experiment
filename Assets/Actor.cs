@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Actor : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class Actor : MonoBehaviour
     public bool IsDead { get; private set; }
 
 
-    [field: SerializeField]
-    public Actor Me { get; private set; }
+    public UnityEvent evt;
 
 }

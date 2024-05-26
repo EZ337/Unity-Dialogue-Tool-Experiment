@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using Unity.VisualScripting;
 using System;
+using System.Reflection;
+using System.Linq;
 
 [CustomEditor(typeof(Condition))]
 public class ConditionEditor : Editor
@@ -17,6 +19,7 @@ public class ConditionEditor : Editor
     public ObjectField obj;
     public IntegerField intCompare;
     public Button compareBtn;
+    public DropdownField conditionFunctionField;
 
     public override VisualElement CreateInspectorGUI()
     {
@@ -30,13 +33,60 @@ public class ConditionEditor : Editor
         obj = root.Q<ObjectField>("param1");
         intCompare = root.Q<IntegerField>("int-compare");
         compareBtn.RegisterCallback<ClickEvent>(EvaluateCondition);
+        conditionFunctionField = root.Q<DropdownField>("cond-func");
 
         // Picking the predicate changes the objectType of param1
         // This event handles that.
         predicateField.RegisterValueChangedCallback(OnPredicateChange);
+        obj.RegisterValueChangedCallback(OnObjectChange);
         HideAllOptions();
 
         return root;
+    }
+
+    private void PopulateConditions(Component component)
+    {
+        // Get all methods and properties with ConditionAttribute
+        List<MemberInfo> members = component.GetType()
+            .GetMembers(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(member => (member is MethodInfo || member is PropertyInfo) &&
+                             member.GetCustomAttribute<ConditionAttribute>() != null)
+            .ToList();
+
+        // Debug or handle members with ConditionAttribute
+        foreach (var member in members)
+        {
+            if (member is MethodInfo method)
+            {
+                Debug.Log("Method with ConditionAttribute: " + method.Name);
+            }
+            else if (member is PropertyInfo property)
+            {
+                Debug.Log("Property with ConditionAttribute: " + property.Name);
+            }
+
+            conditionFunctionField.choices.Add(component.GetType() + "/" + member.Name);
+        }
+
+    }
+
+    private void OnObjectChange(ChangeEvent<UnityEngine.Object> evt)
+    {
+
+        if (evt.newValue.GetType() == typeof(GameObject))
+        {
+            //Debug.Log("We got a gameObject");
+            GameObject go = (GameObject) obj.value;
+            Component[] components = go.GetComponents<Component>();
+            conditionFunctionField.choices.Clear();
+
+            foreach (Component component in components)
+            {
+                //Debug.Log(item);
+                PopulateConditions(component);
+            }
+        }
+
     }
 
     private void OnPredicateChange(ChangeEvent<Enum> evt)
@@ -114,7 +164,7 @@ public class ConditionEditor : Editor
 
     private void HideAllOptions()
     {
-        obj.style.display = DisplayStyle.None;
+        //obj.style.display = DisplayStyle.None;
         intCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
     }
