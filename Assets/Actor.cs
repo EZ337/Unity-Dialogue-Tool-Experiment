@@ -33,6 +33,6 @@ public class Actor : MonoBehaviour
     [Condition(typeof(Collider))]
     public bool ActorHasCollider(Collider collider)
     {
-        return TryGetComponent<Collider>(out Collider sth);
+        return (collider == GetComponent<Collider>());
     }
 }

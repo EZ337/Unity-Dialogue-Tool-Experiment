@@ -58,14 +58,36 @@ public class Condition : MonoBehaviour
 
     public static bool EvaluateParam2(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
     {
-        // All functions should not take args
+        // Function should take param2. Need to expand this later probably
         System.Object[] argsList = new System.Object[1] { param2 };
         System.Object ret = function.Invoke(obj, argsList); // Call the function
         
         if (ret is bool bRet)
         {
-            int retVal = (bRet) ? 1 : 0;
-            return Compare(retVal, comparator);
+            // returnedValue = 0 if true. 1 if false.
+            int retVal = (bRet) ? 0 : 1;
+
+            if (comparator == ConditionComparator.Equal)
+            {
+                // True means 0, false is otherwise... ik. Backwards
+                // In casee I forget why: Remember in architecture, True means (A - B) = 0. Meaning they are the same
+                // Compare() is a true boolean evaluation. So If checking equal, you want to check that there is no difference i.e.
+                // result is 0.
+
+                return Compare(retVal, comparator);
+            }
+            else if (comparator == ConditionComparator.NotEqual)
+            {
+                // Because we are checking NotEqual, that means we are checking that there IS a difference. In other words,
+                // returnedValue should NOT be 0.
+
+                return Compare(retVal, comparator);
+            }
+            else
+            {
+                Debug.LogWarning($"Only choose Equal or NotEqual for Bool returning functions. Returning false");
+                return false;
+            }
         }
 
         Debug.LogWarning($"{function} Does not return a boolean. ConditionFunction returning false");
