@@ -19,15 +19,57 @@ public class Condition : MonoBehaviour
         return actor.IsDead;
     }
     
-    public static void Evaluate(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
+
+    /// <summary>
+    /// Evaluates obj against param2 based off of function. Returns the comparison. Returns false if unable to compare
+    /// </summary>
+    /// <param name="obj">Object owning the function call. Must be thhe declaring type for function.
+    /// It's also the subject of the condition</param>
+    /// <param name="function">Condition predicate. The question being asked. Method with the [Condition] attribute</param>
+    /// <param name="comparator">The comparison operator to check foro</param>
+    /// <param name="param2">The other object to compare against</param>
+    /// <returns>A valid comparison of true or false. False if unable to compare the two objects</returns>
+    public static bool Evaluate(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
     {
+        // All functions should not take args
         System.Object[] argsList = new System.Object[0];
-        System.Object ret = function.Invoke(obj, argsList);
+        System.Object ret = function.Invoke(obj, argsList); // Call the function
+
+        // Can we compare the two objects against each other? (It's a loose definition here)
         if (ret is IComparable comparableRet && param2 is IComparable comparableParam2)
         {
-            Debug.Log(comparableRet.CompareTo(comparableParam2));
+            try
+            {
+                return Compare(comparableRet.CompareTo(comparableParam2), comparator);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Condition - {function}: Cannot compare these two types with each other. Error is handled though. Let EZ know");
+                Debug.LogError($"Condition Function Returning false.\n" + ex);
+                return false;
+            }
         }
+
+
+        Debug.LogWarning($"Condition - {function}: Param1 and Param2 cannot be compared to each other. False");
+        return false;
+    }
+
+
+    public static bool EvaluateParam2(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
+    {
+        // All functions should not take args
+        System.Object[] argsList = new System.Object[1] { param2 };
+        System.Object ret = function.Invoke(obj, argsList); // Call the function
         
+        if (ret is bool bRet)
+        {
+            int retVal = (bRet) ? 1 : 0;
+            return Compare(retVal, comparator);
+        }
+
+        Debug.LogWarning($"{function} Does not return a boolean. ConditionFunction returning false");
+        return false;
     }
 
     private static bool Compare(int comparison, ConditionComparator comparator)

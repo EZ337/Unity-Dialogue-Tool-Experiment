@@ -107,6 +107,7 @@ public class ConditionEditor : Editor
     /// <param name="evt"></param>
     private void OnObjectChange(ChangeEvent<UnityEngine.Object> evt)
     {
+        HideAllOptions();
         if (evt.newValue != null)
         {
             ShowElement(conditionField);
@@ -132,10 +133,6 @@ public class ConditionEditor : Editor
             }
 
         }
-        else
-        {
-            HideAllOptions();
-        }
 
     }
 
@@ -145,7 +142,7 @@ public class ConditionEditor : Editor
     /// <param name="evt"></param>
     private void OnConditionFunctionChange(ChangeEvent<string> evt)
     {
-        Debug.Log("Dropdown Value changed");
+        //Debug.Log("Dropdown Value changed");
         //Debug.Log(evt.newValue
 
         selectedMethod = methods[conditionField.choices.IndexOf(evt.newValue)];
@@ -159,12 +156,15 @@ public class ConditionEditor : Editor
     private void SetUpConditionWindow(MemberInfo method)
     {
         ConditionAttribute attr = method.GetCustomAttribute<ConditionAttribute>();
+        // NOTE: Room to deal with Param1 as well. For now, param1 is neglected.
+        // In future, param1 could potentially support condition checking for methods that do not
+        // belong to the calling class... Idk if we should support that. But just in case.
 
         Type attrType = attr.Param2;
 
         HideAllOptions();
         ShowElement(conditionField);
-        // If the attribute type of 
+        // Show the appropriate param2 field
         if (attrType != null)
         {
             ShowElement(comparatorField);
@@ -192,7 +192,15 @@ public class ConditionEditor : Editor
             else
             {
                 ShowElement(param2Field);
-                param2Field.objectType = attrType;
+                try
+                { 
+                    param2Field.objectType = attrType;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"Unable to properly accept type {attrType}. Let EZ Know");
+                    Debug.LogError(ex);
+                }
                 selectedArgument = param2Field;
             }
         }
@@ -244,8 +252,17 @@ public class ConditionEditor : Editor
                 }
             }
 
-            // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-            Condition.Evaluate(callingObject, methodInfo, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument));
+            if (selectedArgument is ObjectField objectField)
+            {
+                // Evaluate param2 as an argument for the function
+                Debug.Log(Condition.EvaluateParam2(callingObject, methodInfo, (ConditionComparator)comparatorField.value, objectField.value));
+            }
+            else
+            {
+                // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
+                Debug.Log(Condition.Evaluate(callingObject, methodInfo, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument)));
+            }
+
         }
     }
 
@@ -259,6 +276,8 @@ public class ConditionEditor : Editor
             return textField.value;
         else if (elm is ObjectField objectField)
             return objectField.value;
+        else if (elm is Toggle toggle)
+            return toggle.value;
 
         return null;
     }
