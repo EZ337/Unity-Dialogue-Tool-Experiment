@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Linq;
 using PlasticGui;
 
-[CustomEditor(typeof(Condition))]
+[CustomEditor(typeof(ConditionTester))]
 public class ConditionEditor : Editor
 {
 
@@ -192,6 +192,7 @@ public class ConditionEditor : Editor
             else
             {
                 ShowElement(param2Field);
+                HideElement(comparatorField);
                 try
                 { 
                     param2Field.objectType = attrType;
@@ -222,45 +223,73 @@ public class ConditionEditor : Editor
         conditionField.SetValueWithoutNotify("No Function");
     }
 
+    private Tuple<System.Object, MethodInfo> PreProcess()
+    {
+        // Convert the selected method into a MethodInfo
+        MethodInfo methodInfo;
+        if (selectedMethod is PropertyInfo propertyInfo)
+        {
+            methodInfo = propertyInfo.GetMethod;
+        }
+        else
+        {
+            methodInfo = (MethodInfo)selectedMethod;
+        }
+
+
+        // This section converts the object into the appropriate type that can call this method
+        System.Object callingObject = param1Field.value;
+        if (callingObject is GameObject go)
+        {
+            Type targetType = methodInfo.DeclaringType;
+            foreach (var item in go.GetComponents<Component>())
+            {
+                if (item.GetType() == targetType)
+                {
+                    callingObject = item;
+                    break;
+                }
+            }
+        }
+
+        return new(callingObject, methodInfo);
+    }
+
+    private void CreateCondition(ClickEvent evt)
+    {
+        Tuple<System.Object, MethodInfo> values = PreProcess();
+        Condition condition;
+
+        if (selectedArgument is ObjectField objectField)
+        {
+            // Evaluate param2 as an argument for the function
+            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
+        }
+        else
+        {
+            // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
+            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
+        }
+
+        Debug.Log("Created Condition: " + condition);
+    }
+
+
     private void EvaluateCondition(ClickEvent evt)
     {
         if (selectedMethod != null)
         {
-            MethodInfo methodInfo;
-            if (selectedMethod is PropertyInfo propertyInfo)
-            {
-                methodInfo = propertyInfo.GetMethod;
-            }
-            else
-            {
-                methodInfo = (MethodInfo)selectedMethod;
-            }
-
-
-            // This section converts the object into the appropriate type that can call this method
-            System.Object callingObject = param1Field.value;
-            if (callingObject is GameObject go)
-            {
-                Type targetType = methodInfo.DeclaringType;
-                foreach (var item in go.GetComponents<Component>())
-                {
-                    if (item.GetType() == targetType)
-                    {
-                        callingObject = item;
-                        break;
-                    }
-                }
-            }
+            var val = PreProcess();
 
             if (selectedArgument is ObjectField objectField)
             {
                 // Evaluate param2 as an argument for the function
-                Debug.Log(Condition.EvaluateParam2(callingObject, methodInfo, (ConditionComparator)comparatorField.value, objectField.value));
+                Debug.Log(Condition.EvaluateParam2(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, objectField.value));
             }
             else
             {
                 // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-                Debug.Log(Condition.Evaluate(callingObject, methodInfo, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument)));
+                Debug.Log(Condition.Evaluate(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument)));
             }
 
         }
@@ -312,6 +341,7 @@ public class ConditionEditor : Editor
         floatCompare.style.display = DisplayStyle.None;
         stringCompare.style.display = DisplayStyle.None;
         param2Field.style.display = DisplayStyle.None;
+        param2Field.value = null;
         boolCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
         compareBtn.style.display = DisplayStyle.None;

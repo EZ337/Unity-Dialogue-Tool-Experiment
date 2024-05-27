@@ -4,21 +4,37 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class Condition : MonoBehaviour
+
+public class Condition
 {
-    [SerializeField, HideInInspector]
-    ConditionPredicate conditionPredicate;
 
-    public static bool GetLevel(Actor actor, int level, ConditionComparator comparator)
+    public System.Object obj;
+    public MethodInfo function;
+    public ConditionComparator comparator;
+    public System.Object param2;
+    public bool param2Evaluation = false;
+
+    public Condition(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2, bool param2Evaluation)
     {
-         return Compare(actor.Level.CompareTo(level), comparator);
+        this.obj = obj;
+        this.function = function;
+        this.comparator = comparator;
+        this.param2 = param2;
+        this.param2Evaluation = param2Evaluation;
     }
 
-    public static bool GetDead(Actor actor)
+    public bool EvaluateCondition()
     {
-        return actor.IsDead;
+        if (param2Evaluation)
+        {
+            return EvaluateParam2(obj, function, comparator, param2);
+        }
+        else
+        {
+            return Evaluate(obj, function, comparator, param2);
+        }
     }
-    
+ 
 
     /// <summary>
     /// Evaluates obj against param2 based off of function. Returns the comparison. Returns false if unable to compare
@@ -64,6 +80,12 @@ public class Condition : MonoBehaviour
         
         if (ret is bool bRet)
         {
+            // Just returns the result from the function. This means all the work is left to
+            // the function itself. May need revisitation to uncomment below but for now, the work is done
+            // by the function.
+            return bRet;
+
+            /*
             // returnedValue = 0 if true. 1 if false.
             int retVal = (bRet) ? 0 : 1;
 
@@ -88,6 +110,8 @@ public class Condition : MonoBehaviour
                 Debug.LogWarning($"Only choose Equal or NotEqual for Bool returning functions. Returning false");
                 return false;
             }
+
+            */
         }
 
         Debug.LogWarning($"{function} Does not return a boolean. ConditionFunction returning false");
@@ -114,14 +138,6 @@ public class Condition : MonoBehaviour
 
         return false;
     }
-}
-
-public enum ConditionPredicate
-{
-    None,
-    GetLevel,
-    GetIsDead,
-    GetGlobalVariable,
 }
 
 public enum ConditionComparator

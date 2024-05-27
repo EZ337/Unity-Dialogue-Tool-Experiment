@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Actor : MonoBehaviour
 {
 
+    public List<Condition> conditions = new List<Condition>();
+
     [Condition(typeof(int))]
     [field: SerializeField]
     public int Level {  get; private set; }
