@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07de24d3c9fc52f469072578cf662d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditions: []
   <Level>k__BackingField: 50
   <IsDead>k__BackingField: 0
   evt:
@@ -794,7 +795,7 @@ GameObject:
   - component: {fileID: 1797127581}
   - component: {fileID: 1797127580}
   - component: {fileID: 1797127579}
-  - component: {fileID: 1797127586}
+  - component: {fileID: 1797127585}
   m_Layer: 0
   m_Name: DeadSphere
   m_TagString: Untagged
@@ -826,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07de24d3c9fc52f469072578cf662d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditions: []
   <Level>k__BackingField: 7
   <IsDead>k__BackingField: 1
   evt:
@@ -917,7 +919,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1797127586
+--- !u!114 &1797127585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -926,9 +928,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1797127577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52511a40d1a5e71488aecb64864a6ce3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0080e6fec2a51344b8d8e64cb0f93a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Conditions>k__BackingField: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

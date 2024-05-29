@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-
-public class Condition
+public class Condition : UnityEngine.Object
 {
 
     public System.Object obj;
@@ -33,6 +32,15 @@ public class Condition
         {
             return Evaluate(obj, function, comparator, param2);
         }
+    }
+
+    /// <summary>
+    /// Defines the implicit cconversion to a bool. Returns the evaluated condition
+    /// </summary>
+    /// <param name="condition">Condition to evaluate</param>
+    public static implicit operator bool(Condition condition)
+    {
+        return condition.EvaluateCondition();
     }
  
 
