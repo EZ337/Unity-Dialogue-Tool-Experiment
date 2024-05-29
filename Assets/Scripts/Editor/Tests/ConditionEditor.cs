@@ -22,6 +22,7 @@ public class ConditionEditor : Editor
     public FloatField floatCompare;
     public TextField stringCompare;
     public Toggle boolCompare;
+    public Toggle ORField;
     public ObjectField param2Field;
     public Button compareBtn;
 
@@ -43,6 +44,7 @@ public class ConditionEditor : Editor
         stringCompare = root.Q<TextField>("string-compare");
         boolCompare = root.Q<Toggle>("bool-compare");
         param2Field = root.Q<ObjectField>("param2");
+        ORField = root.Q<Toggle>("OR");
 
         compareBtn = root.Q<Button>("evaluateCondition");
         compareBtn.RegisterCallback<ClickEvent>(EvaluateCondition);
@@ -206,6 +208,7 @@ public class ConditionEditor : Editor
             }
         }
 
+        ShowElement(ORField);
         ShowElement(compareBtn);
     }
 
@@ -263,12 +266,12 @@ public class ConditionEditor : Editor
         if (selectedArgument is ObjectField objectField)
         {
             // Evaluate param2 as an argument for the function
-            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), ORField.value ,true);
         }
         else
         {
             // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), ORField.value ,false);
         }
 
         Debug.Log("Created Condition: " + condition);
@@ -331,6 +334,7 @@ public class ConditionEditor : Editor
         boolCompare.style.display = DisplayStyle.Flex;
         comparatorField.style.display = DisplayStyle.Flex;
         compareBtn.style.display = DisplayStyle.Flex;
+        ORField.style.display = DisplayStyle.Flex;
     }
 
     private void HideAllOptions()
@@ -345,6 +349,7 @@ public class ConditionEditor : Editor
         boolCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
         compareBtn.style.display = DisplayStyle.None;
+        ORField.style.display = DisplayStyle.None;
     }
 
     #endregion

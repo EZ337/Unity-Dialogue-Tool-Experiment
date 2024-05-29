@@ -781,6 +781,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!134 &1009740431
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1 &1797127577
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +806,6 @@ GameObject:
   - component: {fileID: 1797127582}
   - component: {fileID: 1797127581}
   - component: {fileID: 1797127580}
-  - component: {fileID: 1797127579}
   - component: {fileID: 1797127585}
   m_Layer: 0
   m_Name: DeadSphere
@@ -803,18 +814,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1797127579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797127577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ae4d1274dae4e40b1a68908536f306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1797127580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,7 +839,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797127577}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 1009740431}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -932,10 +931,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Conditions:
-  - comparator: 2
+  - obj: {fileID: 764912000}
+    comparator: 2
+    OR: 0
+    methodName: get_Level
+    param2String: 3
+    param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
-  - comparator: 2
+  - obj: {fileID: 1797127580}
+    comparator: 0
+    OR: 1
+    methodName: ActorHasCollider
+    param2String: SphereCollider
+    param2AsUnityObject: {fileID: 764912001}
     param2Evaluation: 1
+  - obj: {fileID: 764912000}
+    comparator: 0
+    OR: 0
+    methodName: get_IsDead
+    param2String: True
+    param2AsUnityObject: {fileID: 0}
+    param2Evaluation: 0
+  - obj: {fileID: 1797127580}
+    comparator: 0
+    OR: 0
+    methodName: ActorHasCollider
+    param2String: SphereCollider
+    param2AsUnityObject: {fileID: 1797127581}
+    param2Evaluation: 1
+  - obj: {fileID: 1797127580}
+    comparator: 0
+    OR: 1
+    methodName: TestMethod
+    param2String: 
+    param2AsUnityObject: {fileID: 0}
+    param2Evaluation: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

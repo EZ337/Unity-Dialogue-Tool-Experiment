@@ -8,19 +8,41 @@ using UnityEngine;
 public class Condition
 {
 
-    public System.Object obj;
+    public UnityEngine.Object obj;
     public MethodInfo function;
     public ConditionComparator comparator;
     public System.Object param2;
+    public bool OR = false; // Whether this condition treated as AND or OR
+
+    public string methodName;
+    public string param2String = "";
+    public UnityEngine.Object param2AsUnityObject;
+
+    [HideInInspector]
     public bool param2Evaluation = false;
 
-    public Condition(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2, bool param2Evaluation)
+    public Condition(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2, bool OR, bool param2Evaluation)
     {
-        this.obj = obj;
+
+        if (function.ReturnType == typeof(void))
+        {
+            Debug.LogWarning($"{function} returns void. The condition will always be false");
+        }
+
+
+        this.obj = (UnityEngine.Object)obj;
         this.function = function;
         this.comparator = comparator;
         this.param2 = param2;
+        this.OR = OR;
         this.param2Evaluation = param2Evaluation;
+
+        methodName = function.Name;
+        if (param2 != null )
+        {
+            param2String = param2.GetType().Name;
+            param2AsUnityObject = param2 as UnityEngine.Object;
+        }
     }
 
     public bool EvaluateCondition()
@@ -131,9 +153,9 @@ public class Condition
     {
         switch (comparator)
         {
-            case ConditionComparator.Equal:
+            case ConditionComparator.EqualTo:
                 return comparison == 0;
-            case ConditionComparator.NotEqual:
+            case ConditionComparator.NotEqualTo:
                 return comparison != 0;
             case ConditionComparator.GreaterThan:
                 return comparison > 0;
@@ -151,10 +173,10 @@ public class Condition
 
 public enum ConditionComparator
 {
-    Equal,
+    EqualTo,
     LessThan,
     GreaterThan,
     LessThanOrEqual,
     GreaterThanOrEqual,
-    NotEqual
+    NotEqualTo
 }
