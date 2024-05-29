@@ -6,6 +6,7 @@ using UnityEditor.UIElements;
 using System;
 using System.Reflection;
 using System.Linq;
+using Unity.VisualScripting;
 
 [CustomEditor(typeof(ConditionManager))]
 public class ConditionManagerInspector : Editor
@@ -21,18 +22,33 @@ public class ConditionManagerInspector : Editor
     public Toggle boolCompare;
     public ObjectField param2Field;
     public Button compareBtn;
+    public Button createConditionBtn;
 
     private List<MemberInfo> methods = new List<MemberInfo>();
     private MemberInfo selectedMethod;
     private VisualElement selectedArgument;
+
+    //private SerializedProperty conditionsListProperty;
 
     public override VisualElement CreateInspectorGUI()
     {
         VisualElement root = new VisualElement();
         VisualTree.CloneTree(root);
 
+
         // Draw the default inspector in the IMGUI Container
         root.Q<IMGUIContainer>("default-inspector-container").onGUIHandler = () => { DrawDefaultInspector(); };
+
+        // Get the serialized object of the inspected object
+        SerializedObject serializedObject = new SerializedObject(target);
+
+        //// Find the SerializedProperty for the Conditions property
+        //conditionsListProperty = serializedObject.FindProperty("Conditions");
+
+        //if (conditionsListProperty == null)
+        //{
+        //    Debug.LogError($"{name} - Was unable to grab the conditionsList on the ConditionManager. Let EZ Know");
+        //}
 
 
         param1Field = root.Q<ObjectField>("param1");
@@ -46,6 +62,9 @@ public class ConditionManagerInspector : Editor
 
         compareBtn = root.Q<Button>("evaluateCondition");
         compareBtn.RegisterCallback<ClickEvent>(EvaluateCondition);
+
+        createConditionBtn = root.Q<Button>("createCondition");
+        createConditionBtn.RegisterCallback<ClickEvent>(CreateCondition); 
 
         param1Field.RegisterValueChangedCallback(OnObjectChange);
         conditionField.RegisterValueChangedCallback(OnConditionFunctionChange);
@@ -206,6 +225,7 @@ public class ConditionManagerInspector : Editor
         }
 
         ShowElement(compareBtn);
+        ShowElement(createConditionBtn);
     }
 
 
@@ -259,18 +279,24 @@ public class ConditionManagerInspector : Editor
         Tuple<System.Object, MethodInfo> values = PreProcess();
         Condition condition;
 
-        if (selectedArgument is ObjectField objectField)
+        if (selectedArgument is ObjectField)
         {
             // Evaluate param2 as an argument for the function
-            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
         }
         else
         {
             // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
         }
 
-        Debug.Log("Created Condition: " + condition);
+        //Debug.Log("Created Condition: " + condition);
+        // Add the new Condition to the list
+        if (target is ConditionManager conditionManager)
+        {
+            conditionManager.Conditions.Add(condition);
+            EditorUtility.SetDirty(target);
+        }
     }
 
 
@@ -330,6 +356,7 @@ public class ConditionManagerInspector : Editor
         boolCompare.style.display = DisplayStyle.Flex;
         comparatorField.style.display = DisplayStyle.Flex;
         compareBtn.style.display = DisplayStyle.Flex;
+        createConditionBtn.style.display = DisplayStyle.Flex;
     }
 
     private void HideAllOptions()
@@ -344,6 +371,7 @@ public class ConditionManagerInspector : Editor
         boolCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
         compareBtn.style.display = DisplayStyle.None;
+        createConditionBtn.style.display = DisplayStyle.None;
     }
 
     #endregion

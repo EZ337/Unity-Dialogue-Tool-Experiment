@@ -263,12 +263,12 @@ public class ConditionEditor : Editor
         if (selectedArgument is ObjectField objectField)
         {
             // Evaluate param2 as an argument for the function
-            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), true);
         }
         else
         {
             // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-            condition = new Condition(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
+            condition = new(values.Item1, values.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false);
         }
 
         Debug.Log("Created Condition: " + condition);

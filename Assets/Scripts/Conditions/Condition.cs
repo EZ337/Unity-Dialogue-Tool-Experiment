@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class Condition : UnityEngine.Object
+[System.Serializable]
+public class Condition
 {
 
     public System.Object obj;

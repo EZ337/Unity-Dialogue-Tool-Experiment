@@ -7,8 +7,8 @@ public class ConditionManager : MonoBehaviour
     /// <summary>
     /// List of conditions
     /// </summary>
-    [field : SerializeField]
-    public List<Condition> Conditions {  get; private set; } = new List<Condition>();
+
+    public List<Condition> Conditions = new List<Condition>();
 
     public bool EvaluateConditions()
     {
