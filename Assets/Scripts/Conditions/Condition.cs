@@ -115,11 +115,11 @@ public class Condition
     {
         if (param2Evaluation)
         {
-            return EvaluateParam2(Obj, Function, Comparator, param2);
+            return EvaluateParam2(Obj, Function, Comparator, Param2);
         }
         else
         {
-            return Evaluate(Obj, Function, Comparator, param2);
+            return Evaluate(Obj, Function, Comparator, Param2);
         }
     }
 

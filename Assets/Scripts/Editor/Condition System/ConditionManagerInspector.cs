@@ -302,9 +302,9 @@ public class ConditionManagerInspector : Editor
         }
     }
 
-
     private void EvaluateCondition(ClickEvent evt)
     {
+        /*
         if (selectedMethod != null)
         {
             var val = PreProcess();
@@ -321,6 +321,13 @@ public class ConditionManagerInspector : Editor
             }
 
         }
+        */
+
+        if (target is ConditionManager conditionManager)
+        {
+            Debug.Log("FinalCondition:" + conditionManager.EvaluateConditions());
+        }
+
     }
 
     private System.Object GetElementValue(VisualElement elm)
@@ -374,7 +381,7 @@ public class ConditionManagerInspector : Editor
         param2Field.value = null;
         boolCompare.style.display = DisplayStyle.None;
         comparatorField.style.display = DisplayStyle.None;
-        compareBtn.style.display = DisplayStyle.None;
+        //compareBtn.style.display = DisplayStyle.None;
         createConditionBtn.style.display = DisplayStyle.None;
         ORField.style.display = DisplayStyle.None;
     }

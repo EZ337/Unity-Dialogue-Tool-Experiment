@@ -931,39 +931,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Conditions:
-  - obj: {fileID: 764912000}
-    comparator: 2
-    OR: 0
-    methodName: get_Level
-    param2String: 3
-    param2AsUnityObject: {fileID: 0}
-    param2Evaluation: 0
   - obj: {fileID: 1797127580}
     comparator: 0
-    OR: 1
-    methodName: ActorHasCollider
-    param2String: SphereCollider
-    param2AsUnityObject: {fileID: 764912001}
-    param2Evaluation: 1
-  - obj: {fileID: 764912000}
-    comparator: 0
-    OR: 0
+    or: 0
     methodName: get_IsDead
-    param2String: True
+    param2Type: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+    param2Value: True
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
   - obj: {fileID: 1797127580}
+    comparator: 2
+    or: 0
+    methodName: get_Level
+    param2Type: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+    param2Value: 5
+    param2AsUnityObject: {fileID: 0}
+    param2Evaluation: 0
+  - obj: {fileID: 764912000}
     comparator: 0
-    OR: 0
-    methodName: ActorHasCollider
-    param2String: SphereCollider
-    param2AsUnityObject: {fileID: 1797127581}
-    param2Evaluation: 1
-  - obj: {fileID: 1797127580}
-    comparator: 0
-    OR: 1
-    methodName: TestMethod
-    param2String: 
+    or: 0
+    methodName: get_IsDead
+    param2Type: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+    param2Value: False
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
 --- !u!1660057539 &9223372036854775807

@@ -19,8 +19,11 @@ public class ConditionManager : MonoBehaviour
         {
             if (!condition)
             {
+                Debug.Log($"{condition.MethodName} evaluated to false");
                 return false;
             }
+
+            Debug.Log($"{condition.MethodName} evaluated to true");
         }
 
         return true;
