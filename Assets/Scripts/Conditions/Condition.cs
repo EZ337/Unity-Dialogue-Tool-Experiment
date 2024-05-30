@@ -84,6 +84,12 @@ public class Condition
     #endregion
 
 
+    public void Reconstruct()
+    {
+        this.Function = null;
+        this.param2 =  null;
+    }
+
     public Condition(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2, bool OR, bool param2Evaluation)
     {
 
