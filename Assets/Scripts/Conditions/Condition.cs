@@ -7,40 +7,106 @@ using UnityEngine;
 [System.Serializable]
 public class Condition
 {
+    #region Fields
+    [SerializeField] private UnityEngine.Object obj;
+    [SerializeField] private ConditionComparator comparator;
+    [SerializeField] private bool or = false;
+    [SerializeField] private string methodName;
+    [SerializeField] private string param2Type;
+    [SerializeField] private string param2Value;
+    [SerializeField] private UnityEngine.Object param2AsUnityObject;
+    [SerializeField, HideInInspector] private bool param2Evaluation = false;
+    
+    // They already not serialized since private but hey...
+    [NonSerialized] private MethodInfo function;
+    [NonSerialized] private System.Object param2;
+    #endregion
 
-    public UnityEngine.Object obj;
-    public MethodInfo function;
-    public ConditionComparator comparator;
-    public System.Object param2;
-    public bool OR = false; // Whether this condition treated as AND or OR
+    #region Properties
+    public UnityEngine.Object Obj { get => obj; private set => obj = value; }
+    public ConditionComparator Comparator { get => comparator; private set => comparator = value; }
+    public bool OR { get => or; private set => or = value; } // Whether this condition treated as AND or OR
 
-    public string methodName;
-    public string param2String = "";
-    public UnityEngine.Object param2AsUnityObject;
+    // MethodInfo Serialization since Unity does not serialize by default.
+    // Reflections can be a performance concern so worth coming back to
+    // TODO: Update to a custom [better] serialization approach
+    public string MethodName { get => methodName; private set => methodName = value; }
+    public MethodInfo Function
+    {
+        // Creates and caches function if its null.
+        get
+        {
+            if (function == null)
+            {
+                if (MethodName == null)
+                    Debug.LogError("MethodName was null for some reason. Let EZ Know");
+                function = Obj.GetType().GetMethod(MethodName);
+            }
+            if (function == null)
+            {
+                Debug.LogError("Critical Error. Was unable to fetch condition function. Let EZ Know");
+            }
 
-    [HideInInspector]
-    public bool param2Evaluation = false;
+            return function;
+        }
+        private set { function = value; }
+    }
+
+    // System.Object Serialization since Unity does cannot serialize
+    public string Param2Type { get => param2Type; private set => param2Type = value; }
+    public string Param2Value { get => param2Value; private set=> param2Value = value; }
+
+    public System.Object Param2
+    {
+        get
+        {
+            // Reconstruct param2 from its serialized form
+            if (param2 == null && !string.IsNullOrEmpty(param2Type))
+            {
+                var type = Type.GetType(param2Type);
+                if (type != null)
+                {
+                    if (typeof(UnityEngine.Object).IsAssignableFrom(type))
+                    {
+                        param2 = param2AsUnityObject;
+                    }
+                    else
+                    {
+                        param2 = Convert.ChangeType(param2Value, type);
+                    }
+                }
+            }
+
+            return param2;
+        }
+        private set => param2 = value;
+    }
+    #endregion
+
 
     public Condition(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2, bool OR, bool param2Evaluation)
     {
 
         if (function.ReturnType == typeof(void))
         {
-            Debug.LogWarning($"{function} returns void. The condition will always be false");
+            Debug.LogWarning($"{function.Name} returns void. The condition will always be false");
         }
 
 
-        this.obj = (UnityEngine.Object)obj;
-        this.function = function;
-        this.comparator = comparator;
+        this.Obj = (UnityEngine.Object)obj;
+        this.Comparator = comparator;
         this.param2 = param2;
         this.OR = OR;
         this.param2Evaluation = param2Evaluation;
 
-        methodName = function.Name;
+        // Save the name of the function so we can rebuild the method
+        // at any point
+        MethodName = function.Name;
+
         if (param2 != null )
         {
-            param2String = param2.GetType().Name;
+            Param2Type = param2.GetType().AssemblyQualifiedName;
+            Param2Value = param2.ToString();
             param2AsUnityObject = param2 as UnityEngine.Object;
         }
     }
@@ -49,11 +115,11 @@ public class Condition
     {
         if (param2Evaluation)
         {
-            return EvaluateParam2(obj, function, comparator, param2);
+            return EvaluateParam2(Obj, Function, Comparator, param2);
         }
         else
         {
-            return Evaluate(obj, function, comparator, param2);
+            return Evaluate(Obj, Function, Comparator, param2);
         }
     }
 
