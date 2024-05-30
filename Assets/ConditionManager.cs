@@ -10,7 +10,7 @@ public class ConditionManager : MonoBehaviour
 
     public List<Condition> Conditions = new List<Condition>();
 
-    public bool EvaluateConditions()
+    public bool EvaluateConditions(bool debug = false)
     {
         // Loop through all conditions and check their validity
         // If any condition returns false, this whole thing is false. Otherwise,
@@ -19,11 +19,16 @@ public class ConditionManager : MonoBehaviour
         {
             if (!condition)
             {
-                Debug.Log($"{condition.MethodName} evaluated to false");
+                if (debug)
+                {
+                    Debug.Log($"{condition.Obj.name}.{condition.MethodName} " +
+                        $"{condition.Comparator} {condition.Param2} evaluated to false. Returning false...");
+                }
                 return false;
             }
 
-            Debug.Log($"{condition.MethodName} evaluated to true");
+            Debug.Log($"{condition.Obj.name}.{condition.MethodName} {condition.Comparator} " +
+                $"{condition.Param2} evaluated to true. Next...");
         }
 
         return true;

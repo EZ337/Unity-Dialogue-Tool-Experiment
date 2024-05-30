@@ -940,6 +940,14 @@ MonoBehaviour:
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
   - obj: {fileID: 1797127580}
+    comparator: 0
+    or: 0
+    methodName: ActorHasCollider
+    param2Type: 
+    param2Value: 
+    param2AsUnityObject: {fileID: 0}
+    param2Evaluation: 1
+  - obj: {fileID: 1797127580}
     comparator: 2
     or: 0
     methodName: get_Level

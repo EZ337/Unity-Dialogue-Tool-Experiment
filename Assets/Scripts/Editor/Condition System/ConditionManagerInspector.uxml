@@ -4,7 +4,8 @@
             <ui:IMGUIContainer name="default-inspector-container" />
         </ui:VisualElement>
         <ui:VisualElement name="divider" style="flex-grow: 1; margin-top: 10px; margin-bottom: 5px; min-height: 2px; background-color: rgb(71, 71, 71);" />
-        <ui:Foldout text="Create/Test New Condition" name="create-cond-foldout" tooltip="Create or Test a condition" view-data-key="create-condition-data-key" style="padding-left: 12px;">
+        <ui:Button text="Test Conditions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="evaluateCondition" />
+        <ui:Foldout text="Create New Condition" name="create-cond-foldout" tooltip="Create or Test a condition" view-data-key="create-condition-data-key" style="padding-left: 12px;">
             <ui:VisualElement style="flex-grow: 1;">
                 <uie:ObjectField label="Param 1" name="param1" type="UnityEngine.Object, UnityEngine.CoreModule" />
                 <ui:DropdownField label="Condition" index="0" choices="No Function" name="cond-func" />
@@ -16,7 +17,6 @@
                 <uie:ObjectField label="Param 2" name="param2" />
                 <ui:Toggle label="OR" name="OR" tooltip="Check this button if you want the condition to be an OR condition. Otherwise, it&apos;s an AND condition" />
                 <ui:Button text="Create Condition" parse-escape-sequences="true" display-tooltip-when-elided="true" name="createCondition" />
-                <ui:Button text="Test Condition" parse-escape-sequences="true" display-tooltip-when-elided="true" name="evaluateCondition" />
             </ui:VisualElement>
         </ui:Foldout>
     </ui:VisualElement>
