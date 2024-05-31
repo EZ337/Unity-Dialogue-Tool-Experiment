@@ -42,13 +42,14 @@ public class ConditionPropertyDrawer : PropertyDrawer
 
             if (property.boxedValue is Condition condition)
             {
-                EditorGUI.LabelField(position, $"{condition}");
-
+                // Display warning if invalid
                 if (condition.Function.ReturnType == typeof(void))
                 {
-                    Debug.LogWarning($"{property.serializedObject.targetObject} " +
-                        $"has function {condition.MethodName} which returns void." +
-                        " Condition will evaluate to false");
+                    EditorGUI.HelpBox(position, $"{condition} always returns false", MessageType.Warning);
+                }
+                else
+                {
+                    EditorGUI.LabelField(position, $"{condition}");
                 }
             }
 
