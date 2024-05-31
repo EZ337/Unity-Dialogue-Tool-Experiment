@@ -160,7 +160,7 @@ public class Condition
     /// <param name="comparator">The comparison operator to check foro</param>
     /// <param name="param2">The other object to compare against</param>
     /// <returns>A valid comparison of true or false. False if unable to compare the two objects</returns>
-    public static bool Evaluate(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
+    public bool Evaluate(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
     {
         // All functions should not take args
         System.Object[] argsList = new System.Object[0];
@@ -187,7 +187,7 @@ public class Condition
     }
 
 
-    public static bool EvaluateParam2(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
+    public bool EvaluateParam2(System.Object obj, MethodInfo function, ConditionComparator comparator, System.Object param2)
     {
         // Function should take param2. Need to expand this later probably
         System.Object[] argsList = new System.Object[1] { param2 };
@@ -247,7 +247,7 @@ public class Condition
         };
     }
 
-    private static bool Compare(int comparison, ConditionComparator comparator)
+    private bool Compare(int comparison, ConditionComparator comparator)
     {
         switch (comparator)
         {

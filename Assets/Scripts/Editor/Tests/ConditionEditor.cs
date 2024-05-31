@@ -284,15 +284,18 @@ public class ConditionEditor : Editor
         {
             var val = PreProcess();
 
+            Condition condition;
             if (selectedArgument is ObjectField objectField)
             {
+                condition = new(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, objectField.value, false, true);
                 // Evaluate param2 as an argument for the function
-                Debug.Log(Condition.EvaluateParam2(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, objectField.value));
+                Debug.Log(condition.EvaluateCondition());
             }
             else
             {
+                condition = new(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument), false, false);
                 // Evaluate (Instance.MethodInfo() lt/gt/eq Param2)
-                Debug.Log(Condition.Evaluate(val.Item1, val.Item2, (ConditionComparator)comparatorField.value, GetElementValue(selectedArgument)));
+                Debug.Log(condition.EvaluateCondition());
             }
 
         }
