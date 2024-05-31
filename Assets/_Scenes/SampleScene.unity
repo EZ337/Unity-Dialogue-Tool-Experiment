@@ -932,30 +932,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conditions:
   - obj: {fileID: 1797127580}
-    comparator: 0
-    or: 0
-    methodName: get_IsDead
-    param2Type: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    param2Value: True
+    comparator: 2
+    or: 1
+    methodName: get_Level
+    param2Type: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+    param2Value: 5
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
   - obj: {fileID: 1797127580}
     comparator: 0
-    or: 0
+    or: 1
     methodName: ActorHasCollider
     param2Type: 
     param2Value: 
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 1
   - obj: {fileID: 1797127580}
-    comparator: 2
-    or: 0
-    methodName: get_Level
-    param2Type: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    param2Value: 5
+    comparator: 0
+    or: 1
+    methodName: ActorHasCollider
+    param2Type: 
+    param2Value: 
     param2AsUnityObject: {fileID: 0}
-    param2Evaluation: 0
-  - obj: {fileID: 764912000}
+    param2Evaluation: 1
+  - obj: {fileID: 1797127580}
     comparator: 0
     or: 0
     methodName: get_IsDead

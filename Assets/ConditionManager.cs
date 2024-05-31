@@ -22,17 +22,22 @@ public class ConditionManager : MonoBehaviour
         // Conditions are evaluated with OR Superiority. Meaning A*B+C*D+E results in A*(B+C)*(D+E)
         for (int i = 0; i < Conditions.Count; i++)
         {
+            // Short circuit if at any point, our running total is false
+            if (!totalLogic) { break; }
+
             Condition condition = Conditions[i];
+            bool currentResult = condition;
 
             // If this condition is an OR condition, Enable orGroupLogic
             if (condition.OR)
             {
                 evaluatingOrGroup = true;
-                orGroupResult = orGroupResult || condition; // the total of the orGroup so far
+                // the total of the orGroup so far is true or whatever this condition's result is
+                orGroupResult = orGroupResult || currentResult;
 
                 if (debug)
                 {
-                    Debug.Log($"OR Condition: {condition} evaluated to {condition}. Current OR Group Result: {orGroupResult}");
+                    Debug.Log($"OR Condition: {condition} evaluated to {currentResult}. Current OR Group Result: {orGroupResult}");
                 }
 
                 // If it's the last condition in our list, finalize the OR group evaluation
@@ -43,50 +48,30 @@ public class ConditionManager : MonoBehaviour
             }
             else
             {
-                // If this is an AND condition mixed preceding OR conditions
+                // If this is an AND condition mixed with preceding OR conditions
                 if (evaluatingOrGroup)
                 {
                     // Finalize the OR group evaluation
-                    totalLogic = totalLogic && orGroupResult;
+                    totalLogic = totalLogic && (orGroupResult || currentResult);
                     evaluatingOrGroup = false;
                     orGroupResult = false;
-
-                    // Short circuit if the OR group result is false
-                    if (!totalLogic)
-                    {
-                        break;
-                    }
                 }
-
-                // Evaluate the current condition
-                if (!condition)
+                else if (!currentResult)
                 {
-                    totalLogic = false;
+                    totalLogic = currentResult;
                     if (debug)
                     {
                         Debug.Log($"{condition} is False. Breaking out of the loop.");
                     }
-                    break;
-                }
-
-                if (debug)
-                {
-                    Debug.Log($"{condition} is True.");
                 }
             }
-        }
-
-        // Final check for any remaining OR group at the end
-        if (evaluatingOrGroup)
-        {
-            totalLogic = totalLogic && orGroupResult;
+            
         }
 
         if (debug)
         {
             Debug.Log("Coalesced Conditions: " + totalLogic);
         }
-
         return totalLogic;
     }
 
