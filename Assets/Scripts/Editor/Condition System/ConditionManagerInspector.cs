@@ -325,7 +325,7 @@ public class ConditionManagerInspector : Editor
 
         if (target is ConditionManager conditionManager)
         {
-            Debug.Log("Conditions Final Conclusion: " + conditionManager.EvaluateConditions(true));
+            conditionManager.EvaluateConditions(true);
         }
 
     }

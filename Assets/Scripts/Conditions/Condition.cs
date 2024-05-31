@@ -221,6 +221,20 @@ public class Condition
         return false;
     }
 
+    public static string ComparatorString( ConditionComparator comparator )
+    {
+        return comparator switch
+        {
+            ConditionComparator.EqualTo => "==",
+            ConditionComparator.NotEqualTo => "!=",
+            ConditionComparator.GreaterThan => ">",
+            ConditionComparator.LessThan => "<",
+            ConditionComparator.GreaterThanOrEqual => ">=",
+            ConditionComparator.LessThanOrEqual => "<=",
+            _ => throw new ArgumentOutOfRangeException(nameof(comparator), comparator, "null"),
+        };
+    }
+
     private static bool Compare(int comparison, ConditionComparator comparator)
     {
         switch (comparator)
@@ -241,6 +255,31 @@ public class Condition
 
         return false;
     }
+
+    /// <summary>
+    /// String representation of Condition
+    /// </summary>
+    /// <returns>String repr of condition</returns>
+    public override string ToString()
+    {
+        string OrTxt = (OR) ? "OR" : "AND";
+        string Param2Txt = (string.IsNullOrEmpty(param2Value)) ? "Null" : param2Value;
+
+        return $"{Obj}.{MethodName} {ComparatorString(Comparator)} {Param2Txt} {OrTxt}";
+    }
+
+    /* Eh Can be nice to have I suppose
+    public string CleanerToString()
+    {
+        string OrTxt = (OR) ? "OR" : "AND";
+        string Param2Txt = (string.IsNullOrEmpty(param2Value)) ? "Null" : param2Value;
+        if (param2AsUnityObject != null) 
+        {
+            Param2Txt = param2AsUnityObject.GetType().ToString();
+        }
+        return $"{Obj.name}.{MethodName} {ComparatorString(Comparator)} {Param2Txt}";
+    }
+    */
 }
 
 public enum ConditionComparator
