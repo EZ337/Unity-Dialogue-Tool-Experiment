@@ -81,6 +81,18 @@ public class Condition
         }
         private set => param2 = value;
     }
+
+    /// <summary>
+    /// If this condition is a valid condition. i.e. There wouldn't be any problems using it
+    /// </summary>
+    public bool IsValid
+    {
+        get
+        {
+            return (Obj != null && Function != null && !string.IsNullOrEmpty(MethodName));
+
+        }
+    }
     #endregion
 
 

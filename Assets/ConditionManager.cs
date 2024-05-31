@@ -61,7 +61,7 @@ public class ConditionManager : MonoBehaviour
                     totalLogic = currentResult;
                     if (debug)
                     {
-                        Debug.Log($"{condition} is False. Breaking out of the loop.");
+                        Debug.Log($"{condition} is False.");
                     }
                 }
             }
@@ -82,10 +82,26 @@ public class ConditionManager : MonoBehaviour
     /// </summary>
     private void OnValidate()
     {
+        List<Condition> ToRemove = new List<Condition>();
         foreach (Condition condition in Conditions)
         {
-            condition.Reconstruct();
-            // Worth defining a custom OnValidate for Condition
+            
+            if (!condition.IsValid)
+            {
+                ToRemove.Add(condition);
+                continue;
+            }
+            else
+            {
+                // Worth defining a custom OnValidate for Condition
+                condition.Reconstruct();
+            }
+        }
+
+        foreach (Condition condition in ToRemove)
+        {
+            Conditions.Remove(condition);
+            Debug.LogWarning("Invalid Condition Removed");
         }
     }
 }
