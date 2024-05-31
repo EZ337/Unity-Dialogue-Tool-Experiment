@@ -932,35 +932,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Conditions:
   - obj: {fileID: 1797127580}
-    comparator: 2
+    comparator: 0
     or: 1
-    methodName: get_Level
-    param2Type: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    param2Value: 5
+    methodName: ActorHasCollider
+    param2Type: UnityEngine.SphereCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    param2Value: DeadSphere (UnityEngine.SphereCollider)
+    param2AsUnityObject: {fileID: 1797127581}
+    param2Evaluation: 1
+  - obj: {fileID: 1797127580}
+    comparator: 0
+    or: 1
+    methodName: ActorHasCollider
+    param2Type: UnityEngine.SphereCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    param2Value: DeadSphere (UnityEngine.SphereCollider)
+    param2AsUnityObject: {fileID: 1797127581}
+    param2Evaluation: 1
+  - obj: {fileID: 1797127580}
+    comparator: 0
+    or: 1
+    methodName: TestMethod
+    param2Type: 
+    param2Value: 
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
   - obj: {fileID: 1797127580}
     comparator: 0
     or: 1
-    methodName: ActorHasCollider
+    methodName: TestMethod
     param2Type: 
     param2Value: 
-    param2AsUnityObject: {fileID: 0}
-    param2Evaluation: 1
-  - obj: {fileID: 1797127580}
-    comparator: 0
-    or: 1
-    methodName: ActorHasCollider
-    param2Type: 
-    param2Value: 
-    param2AsUnityObject: {fileID: 0}
-    param2Evaluation: 1
-  - obj: {fileID: 1797127580}
-    comparator: 0
-    or: 0
-    methodName: get_IsDead
-    param2Type: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-    param2Value: False
     param2AsUnityObject: {fileID: 0}
     param2Evaluation: 0
 --- !u!1660057539 &9223372036854775807
